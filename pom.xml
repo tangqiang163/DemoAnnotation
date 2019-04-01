@@ -19,6 +19,8 @@
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-collections.version>4.3</commons-collections.version>
         <mybatis-plus-boot.starter.version>3.1.0</mybatis-plus-boot.starter.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <springfox-swagger2-ui.version>2.9.2</springfox-swagger2-ui.version>
     </properties>
 
     <dependencies>
@@ -63,6 +65,16 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger2-ui.version}</version>
         </dependency>
     </dependencies>
 

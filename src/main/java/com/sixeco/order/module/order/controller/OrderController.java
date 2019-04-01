@@ -4,6 +4,8 @@ import com.sixeco.order.base.constant.RtnConstant;
 import com.sixeco.order.base.context.RtnInfo;
 import com.sixeco.order.model.dto.MainOrderDTO;
 import com.sixeco.order.module.order.service.OrderService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @ApiOperation(value="新增订单", notes="")
+    @ApiImplicitParam(name = "mainOrderDTO", value = "订单DTO", required = true, dataType = "mainOrderDTO")
     @PostMapping("add")
     @ResponseBody
     public RtnInfo add(@Valid MainOrderDTO mainOrderDTO, BindingResult result) {
@@ -40,6 +44,7 @@ public class OrderController {
         return RtnInfo.success(orderService.add(mainOrderDTO));
     }
 
+    @ApiOperation(value="获取订单列表", notes="")
     @GetMapping("list")
     @ResponseBody
     public RtnInfo list() {

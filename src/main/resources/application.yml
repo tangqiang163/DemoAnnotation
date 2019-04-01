@@ -62,4 +62,3 @@ mybatis-plus:
 # Logger
 logging:
   path: ./logs
-
