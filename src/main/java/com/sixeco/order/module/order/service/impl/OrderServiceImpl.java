@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     public Object list() {
         List emptyList = Collections.EMPTY_LIST;
         boolean empty = Iterables.isEmpty(emptyList);
-        //MainOrder mainOrder = mainOrderMapper.selectById(3);/
+        //MainOrder mainOrder = mainOrderMapper.selectById(3);
         return mainOrderMapper.selectById(3);
     }
 }
