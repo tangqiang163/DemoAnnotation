@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * order_log表
@@ -26,7 +26,7 @@ public class OrderLog implements Serializable {
 
     private Integer mainOrderNo;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Long createBy;
 

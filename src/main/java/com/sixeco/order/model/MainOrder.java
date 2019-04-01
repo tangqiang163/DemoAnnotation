@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * main_order表
@@ -51,7 +51,7 @@ public class MainOrder implements Serializable {
 
     private Boolean settlementStatus;
 
-    private Date settledTime;
+    private LocalDateTime settledTime;
 
     private Boolean splitFlag;
 
@@ -59,9 +59,9 @@ public class MainOrder implements Serializable {
 
     private String remark;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     private Long createBy;
 

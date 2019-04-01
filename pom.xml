@@ -21,6 +21,7 @@
         <mybatis-plus-boot.starter.version>3.1.0</mybatis-plus-boot.starter.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <springfox-swagger2-ui.version>2.9.2</springfox-swagger2-ui.version>
+        <mybatis-typehandlers-jsr310.version>1.0.2</mybatis-typehandlers-jsr310.version>
     </properties>
 
     <dependencies>
@@ -65,6 +66,11 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+            <version>${mybatis-typehandlers-jsr310.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

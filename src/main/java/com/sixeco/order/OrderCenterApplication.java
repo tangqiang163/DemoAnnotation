@@ -15,13 +15,4 @@ public class OrderCenterApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderCenterApplication.class, args);
     }
-
-    /**
-     * 分页插件
-     */
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
-
 }
