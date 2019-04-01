@@ -31,6 +31,10 @@ public class MainOrderDTO {
 
     private String purchaserName;
 
+    private String source;
+
+    private Integer equipment;
+
     @NotNull(message = "电话号码不能为空")
     private String mobile;
 

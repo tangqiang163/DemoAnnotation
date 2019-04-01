@@ -7,6 +7,7 @@ import com.sixeco.order.mapper.OtherOrderItemMapper;
 import com.sixeco.order.mapper.SubOrderMapper;
 import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
+import com.sixeco.order.module.order.Enum.OrderStatusEnum;
 import com.sixeco.order.module.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,27 +51,26 @@ public class OrderServiceImpl implements OrderService {
         //生成子订单号
         //插入子表
         //插入商品表
-        MainOrder build = MainOrder.builder()
-                .mainOrderNo("222")
+        MainOrder mainOrder = MainOrder.builder()
                 .mobile(mainOrderDTO.getMobile())
-                .source("1")
-                .purchaserName("张三")
-                .purchaserId("7")
-                .equipment(3)
-                .orderStatus(1)
+                .source(mainOrderDTO.getSource())
+                .purchaserName(mainOrderDTO.getPurchaserName())
+                .purchaserId(mainOrderDTO.getPurchaserId())
+                .equipment(mainOrderDTO.getEquipment())
+                .orderStatus(OrderStatusEnum.PENDING_PAYMENT.getCode())
                 .idNumber(mainOrderDTO.getIdNumber())
                 .remark(mainOrderDTO.getRemark())
                 .build();
-        mainOrderMapper.insert(build);
+        mainOrderMapper.insertMainOrder(mainOrder);
+        //根据id查询订单号？
 
-        return build;
+        return mainOrderMapper.selectById(mainOrder.getId());
     }
 
     @Override
     public Object list() {
         List emptyList = Collections.EMPTY_LIST;
         boolean empty = Iterables.isEmpty(emptyList);
-        //MainOrder mainOrder = mainOrderMapper.selectById(3);
         return mainOrderMapper.selectById(3);
     }
 }

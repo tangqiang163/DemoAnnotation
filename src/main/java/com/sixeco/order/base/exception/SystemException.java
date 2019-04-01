@@ -1,5 +1,7 @@
 package com.sixeco.order.base.exception;
 
+import lombok.Getter;
+
 /**
  * 异常封装
  *
@@ -8,6 +10,7 @@ package com.sixeco.order.base.exception;
  */
 public class SystemException extends RuntimeException {
 
+    @Getter
     private Integer code;
 
     public SystemException(ServiceException serviceException) {
@@ -18,9 +21,5 @@ public class SystemException extends RuntimeException {
     public SystemException(Integer code, String message) {
         super(message);
         this.code = code;
-    }
-
-    public Integer getCode() {
-        return code;
     }
 }

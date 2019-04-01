@@ -32,4 +32,145 @@
     settled_time, split_flag, split_plan, remark, create_time, update_time, create_by,
     update_by, is_deleted
   </sql>
+  <insert id="insertMainOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.sixeco.order.model.MainOrder" >
+    insert into main_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+        main_order_no,
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="equipment != null" >
+        equipment,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="productCount != null" >
+        product_count,
+      </if>
+      <if test="originalAmount != null" >
+        original_amount,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="userIdTdc != null" >
+        user_id_tdc,
+      </if>
+      <if test="purchaserId != null" >
+        purchaser_id,
+      </if>
+      <if test="purchaserName != null" >
+        purchaser_name,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="idNumber != null" >
+        id_number,
+      </if>
+      <if test="settlementStatus != null" >
+        settlement_status,
+      </if>
+      <if test="settledTime != null" >
+        settled_time,
+      </if>
+      <if test="splitFlag != null" >
+        split_flag,
+      </if>
+      <if test="splitPlan != null" >
+        split_plan,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+        CONCAT( 'P', DATE_FORMAT( NOW(), '%Y%m%d%H%i%s' ), CEILING( RAND( ) * 90000+10000 ) ),
+      <if test="source != null" >
+        #{source,jdbcType=CHAR},
+      </if>
+      <if test="equipment != null" >
+        #{equipment,jdbcType=BIT},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="productCount != null" >
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="originalAmount != null" >
+        #{originalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="userIdTdc != null" >
+        #{userIdTdc,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaserId != null" >
+        #{purchaserId,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaserName != null" >
+        #{purchaserName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementStatus != null" >
+        #{settlementStatus,jdbcType=BIT},
+      </if>
+      <if test="settledTime != null" >
+        #{settledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="splitFlag != null" >
+        #{splitFlag,jdbcType=BIT},
+      </if>
+      <if test="splitPlan != null" >
+        #{splitPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
 </mapper>

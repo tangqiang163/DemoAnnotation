@@ -10,4 +10,6 @@ import com.sixeco.order.model.MainOrder;
  * @date: 2019-03-28
  */
 public interface MainOrderMapper extends BaseMapper<MainOrder> {
+
+    void insertMainOrder(MainOrder mainOrder);
 }
