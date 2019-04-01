@@ -1,5 +1,6 @@
 package com.sixeco.order.module.order.service.impl;
 
+import com.google.common.collect.Iterables;
 import com.sixeco.order.mapper.CarOrderItemMapper;
 import com.sixeco.order.mapper.MainOrderMapper;
 import com.sixeco.order.mapper.OtherOrderItemMapper;
@@ -11,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 订单服务实现
@@ -64,6 +68,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Object list() {
+        List emptyList = Collections.EMPTY_LIST;
+        boolean empty = Iterables.isEmpty(emptyList);
         //MainOrder mainOrder = mainOrderMapper.selectById(3);/
         return mainOrderMapper.selectById(3);
     }
