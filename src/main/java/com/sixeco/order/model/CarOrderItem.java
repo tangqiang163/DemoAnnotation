@@ -1,5 +1,6 @@
 package com.sixeco.order.model;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,8 @@ public class CarOrderItem implements Serializable {
     private Long id;
 
     private String subOrderNo;
+
+    private String itemNo;
 
     private Integer purchaseCount;
 
@@ -95,5 +98,6 @@ public class CarOrderItem implements Serializable {
 
     private Long updateBy;
 
+    @TableLogic
     private Boolean isDeleted;
 }

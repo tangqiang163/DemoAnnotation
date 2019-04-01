@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.sixeco.order.model.CarOrderItem" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="sub_order_no" property="subOrderNo" jdbcType="VARCHAR" />
+    <result column="item_no" property="itemNo" jdbcType="VARCHAR" />
     <result column="purchase_count" property="purchaseCount" jdbcType="INTEGER" />
     <result column="product_code" property="productCode" jdbcType="VARCHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
@@ -41,11 +42,242 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sub_order_no, purchase_count, product_code, product_name, product_price, product_sell_price,
+    id, sub_order_no, item_no, purchase_count, product_code, product_name, product_price, product_sell_price,
     product_attr, deposit, state_subsidy, local_subsidy, manufacturer_subsidy, shipping_way,
     tax_other_price, tax_reason, draw_bill_flag, bill_code, car_vsn, car_vin, car_body_color,
     car_roof_color, car_interior_color, car_part_info, shop_id, receiver_name, receiver_mobile,
     receiver_country, receiver_province, receiver_city, receiver_district, receiver_address,
     discount_flag, create_time, update_time, create_by, update_by, is_deleted
   </sql>
+  <insert id="insertCarOrderItem" parameterType="com.sixeco.order.model.CarOrderItem" >
+    insert into car_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="subOrderNo != null" >
+        sub_order_no,
+      </if>
+        item_no,
+      <if test="purchaseCount != null" >
+        purchase_count,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productSellPrice != null" >
+        product_sell_price,
+      </if>
+      <if test="productAttr != null" >
+        product_attr,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="stateSubsidy != null" >
+        state_subsidy,
+      </if>
+      <if test="localSubsidy != null" >
+        local_subsidy,
+      </if>
+      <if test="manufacturerSubsidy != null" >
+        manufacturer_subsidy,
+      </if>
+      <if test="shippingWay != null" >
+        shipping_way,
+      </if>
+      <if test="taxOtherPrice != null" >
+        tax_other_price,
+      </if>
+      <if test="taxReason != null" >
+        tax_reason,
+      </if>
+      <if test="drawBillFlag != null" >
+        draw_bill_flag,
+      </if>
+      <if test="billCode != null" >
+        bill_code,
+      </if>
+      <if test="carVsn != null" >
+        car_vsn,
+      </if>
+      <if test="carVin != null" >
+        car_vin,
+      </if>
+      <if test="carBodyColor != null" >
+        car_body_color,
+      </if>
+      <if test="carRoofColor != null" >
+        car_roof_color,
+      </if>
+      <if test="carInteriorColor != null" >
+        car_interior_color,
+      </if>
+      <if test="carPartInfo != null" >
+        car_part_info,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="receiverName != null" >
+        receiver_name,
+      </if>
+      <if test="receiverMobile != null" >
+        receiver_mobile,
+      </if>
+      <if test="receiverCountry != null" >
+        receiver_country,
+      </if>
+      <if test="receiverProvince != null" >
+        receiver_province,
+      </if>
+      <if test="receiverCity != null" >
+        receiver_city,
+      </if>
+      <if test="receiverDistrict != null" >
+        receiver_district,
+      </if>
+      <if test="receiverAddress != null" >
+        receiver_address,
+      </if>
+      <if test="discountFlag != null" >
+        discount_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="subOrderNo != null" >
+        #{subOrderNo,jdbcType=VARCHAR},
+      </if>
+        CONCAT( 'C', DATE_FORMAT( NOW(), '%Y%m%d%H%i%s' ), CEILING( RAND( ) * 90000+10000 ) ),
+      <if test="purchaseCount != null" >
+        #{purchaseCount,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productSellPrice != null" >
+        #{productSellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productAttr != null" >
+        #{productAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="stateSubsidy != null" >
+        #{stateSubsidy,jdbcType=DECIMAL},
+      </if>
+      <if test="localSubsidy != null" >
+        #{localSubsidy,jdbcType=DECIMAL},
+      </if>
+      <if test="manufacturerSubsidy != null" >
+        #{manufacturerSubsidy,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingWay != null" >
+        #{shippingWay,jdbcType=VARCHAR},
+      </if>
+      <if test="taxOtherPrice != null" >
+        #{taxOtherPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="taxReason != null" >
+        #{taxReason,jdbcType=VARCHAR},
+      </if>
+      <if test="drawBillFlag != null" >
+        #{drawBillFlag,jdbcType=BIT},
+      </if>
+      <if test="billCode != null" >
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carVsn != null" >
+        #{carVsn,jdbcType=VARCHAR},
+      </if>
+      <if test="carVin != null" >
+        #{carVin,jdbcType=VARCHAR},
+      </if>
+      <if test="carBodyColor != null" >
+        #{carBodyColor,jdbcType=VARCHAR},
+      </if>
+      <if test="carRoofColor != null" >
+        #{carRoofColor,jdbcType=VARCHAR},
+      </if>
+      <if test="carInteriorColor != null" >
+        #{carInteriorColor,jdbcType=VARCHAR},
+      </if>
+      <if test="carPartInfo != null" >
+        #{carPartInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null" >
+        #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCountry != null" >
+        #{receiverCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverProvince != null" >
+        #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null" >
+        #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverDistrict != null" >
+        #{receiverDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null" >
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="discountFlag != null" >
+        #{discountFlag,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
 </mapper>

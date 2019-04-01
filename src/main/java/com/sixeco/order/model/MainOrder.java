@@ -1,5 +1,6 @@
 package com.sixeco.order.model;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -69,6 +70,7 @@ public class MainOrder implements Serializable {
 
     private Long updateBy;
 
+    @TableLogic
     private Boolean isDeleted;
 
 }

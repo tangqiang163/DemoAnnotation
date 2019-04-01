@@ -41,11 +41,17 @@ public class MainOrderDTO {
     @NotNull(message = "身份证号不能为空")
     private String idNumber;
 
+    private String receiverName;
+
+    private String receiverMobile;
+
+    private String receiverAddress;
+
     private Boolean splitFlag;
 
     private String splitPlan;
 
     private String remark;
 
-    private List<SubOrder> subOrders;
+    private List<SubOrderDTO> subOrders;
 }

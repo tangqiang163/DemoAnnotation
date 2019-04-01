@@ -10,4 +10,6 @@ import com.sixeco.order.model.SubOrder;
  * @date: 2019-03-28
  */
 public interface SubOrderMapper extends BaseMapper<SubOrder> {
+
+    void insertSubOrder(SubOrder subOrder);
 }

@@ -10,4 +10,6 @@ import com.sixeco.order.model.OtherOrderItem;
  * @date: 2019-03-28
  */
 public interface OtherOrderItemMapper extends BaseMapper<OtherOrderItem> {
+
+    void insertOtherOrderItem();
 }

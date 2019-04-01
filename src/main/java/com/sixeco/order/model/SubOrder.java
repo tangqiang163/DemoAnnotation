@@ -1,5 +1,6 @@
 package com.sixeco.order.model;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,9 +26,9 @@ public class SubOrder implements Serializable {
 
     private Long id;
 
-    private Integer mainOrderNo;
+    private String mainOrderNo;
 
-    private Integer subOrderNo;
+    private String subOrderNo;
 
     private Integer orderType;
 
@@ -61,5 +62,6 @@ public class SubOrder implements Serializable {
 
     private Long updateBy;
 
+    @TableLogic
     private Boolean isDeleted;
 }
