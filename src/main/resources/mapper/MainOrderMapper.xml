@@ -32,7 +32,7 @@
     settled_time, split_flag, split_plan, remark, create_time, update_time, create_by,
     update_by, is_deleted
   </sql>
-  <insert id="insertMainOrder" parameterType="com.sixeco.order.mapper.MainOrder" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertMainOrder" parameterType="com.sixeco.order.mapper.MainOrderMapper" useGeneratedKeys="true" keyProperty="id" >
     insert into main_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

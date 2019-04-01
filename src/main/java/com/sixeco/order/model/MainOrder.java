@@ -1,6 +1,5 @@
 package com.sixeco.order.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,6 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "main_order")
 public class MainOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;

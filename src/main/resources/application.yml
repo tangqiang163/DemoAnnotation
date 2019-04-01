@@ -44,7 +44,7 @@ spring:
     min-idle: 0
     ## 连接超时时间（毫秒）
     timeout: 0
-## mybatis-plus配置
+## mybatis-plus
 mybatis-plus:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml
@@ -53,11 +53,13 @@ mybatis-plus:
     sql-parser-cache: true
     db-config:
       #主键类型
-      id-type: id_worker
+      id-type: auto
       #字段策略
       field-strategy: not_null
       #逻辑删除配置
       logic-delete-value: 1
       logic-not-delete-value: 0
-
+# Logger
+logging:
+  path: ./logs
 
