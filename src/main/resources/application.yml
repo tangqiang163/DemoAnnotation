@@ -1,48 +1,48 @@
-## Æô¶¯¶Ë¿Ú
+## å¯åŠ¨ç«¯å£
 server:
   port: 9000
 spring:
   application:
     name: order-center
-  ## Êı¾İ¿âÅäÖÃ
+  ## æ•°æ®åº“é…ç½®
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     password: root
     username: root
-    ##  Hikari Á¬½Ó³ØÅäÖÃ
+    ##  Hikari è¿æ¥æ± é…ç½®
     hikari:
-      ## ×îĞ¡¿ÕÏĞÁ¬½ÓÊıÁ¿
+      ## æœ€å°ç©ºé—²è¿æ¥æ•°é‡
       minimum-idle: 5
-      ## ¿ÕÏĞÁ¬½Ó´æ»î×î´óÊ±¼ä£¬Ä¬ÈÏ600000£¨10·ÖÖÓ£©
+      ## ç©ºé—²è¿æ¥å­˜æ´»æœ€å¤§æ—¶é—´ï¼Œé»˜è®¤600000ï¼ˆ10åˆ†é’Ÿï¼‰
       idle-timeout: 180000
-      ## Á¬½Ó³Ø×î´óÁ¬½ÓÊı£¬Ä¬ÈÏÊÇ10
+      ## è¿æ¥æ± æœ€å¤§è¿æ¥æ•°ï¼Œé»˜è®¤æ˜¯10
       maximum-pool-size: 10
-      ## ´ËÊôĞÔ¿ØÖÆ´Ó³Ø·µ»ØµÄÁ¬½ÓµÄÄ¬ÈÏ×Ô¶¯Ìá½»ĞĞÎª,Ä¬ÈÏÖµ£ºtrue
+      ## æ­¤å±æ€§æ§åˆ¶ä»æ± è¿”å›çš„è¿æ¥çš„é»˜è®¤è‡ªåŠ¨æäº¤è¡Œä¸º,é»˜è®¤å€¼ï¼štrue
       auto-commit: true
-      ## Á¬½Ó³ØÄ¸×Ó
+      ## è¿æ¥æ± æ¯å­
       pool-name: MyHikariCP
-      ## ´ËÊôĞÔ¿ØÖÆ³ØÖĞÁ¬½ÓµÄ×î³¤ÉúÃüÖÜÆÚ£¬Öµ0±íÊ¾ÎŞÏŞÉúÃüÖÜÆÚ£¬Ä¬ÈÏ1800000¼´30·ÖÖÓ
+      ## æ­¤å±æ€§æ§åˆ¶æ± ä¸­è¿æ¥çš„æœ€é•¿ç”Ÿå‘½å‘¨æœŸï¼Œå€¼0è¡¨ç¤ºæ— é™ç”Ÿå‘½å‘¨æœŸï¼Œé»˜è®¤1800000å³30åˆ†é’Ÿ
       max-lifetime: 1800000
-      ## Êı¾İ¿âÁ¬½Ó³¬Ê±Ê±¼ä,Ä¬ÈÏ30Ãë£¬¼´30000
+      ## æ•°æ®åº“è¿æ¥è¶…æ—¶æ—¶é—´,é»˜è®¤30ç§’ï¼Œå³30000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  ## RedisÅäÖÃ
+  ## Redisé…ç½®
   redis:
     database: 0
     host: localhost
     port: 6379
     password:
-    ## ×î´óÁ´½ÓÊıÁ¿
+    ## æœ€å¤§é“¾æ¥æ•°é‡
     max-active: 300
-    ## ×î³¤µÈ´ıÊ±¼ä
+    ## æœ€é•¿ç­‰å¾…æ—¶é—´
     max-wait: 10000
-    ## ×î´ó×èÈûÊıÁ¿
+    ## æœ€å¤§é˜»å¡æ•°é‡
     max-idle: 100
-    ## ×îĞ¡×èÈûÊ±¼ä
+    ## æœ€å°é˜»å¡æ—¶é—´
     min-idle: 0
-    ## Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©
+    ## è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
     timeout: 0
 ## mybatis-plus
 mybatis-plus:
@@ -52,11 +52,11 @@ mybatis-plus:
   global-config:
     sql-parser-cache: true
     db-config:
-      #Ö÷¼üÀàĞÍ
+      #ä¸»é”®ç±»å‹
       id-type: auto
-      #×Ö¶Î²ßÂÔ
+      #å­—æ®µç­–ç•¥
       field-strategy: not_null
-      #Âß¼­É¾³ıÅäÖÃ
+      #é€»è¾‘åˆ é™¤é…ç½®
       logic-delete-value: 1
       logic-not-delete-value: 0
 # Logger
