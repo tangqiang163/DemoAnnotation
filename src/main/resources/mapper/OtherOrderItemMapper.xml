@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixeco.order.mapper.OtherOrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.sixeco.order.model.OtherOrderItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sub_order_no" property="subOrderNo" jdbcType="VARCHAR" />
+    <result column="purchase_count" property="purchaseCount" jdbcType="INTEGER" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
+    <result column="product_sell_price" property="productSellPrice" jdbcType="DECIMAL" />
+    <result column="product_attr" property="productAttr" jdbcType="VARCHAR" />
+    <result column="shipping_way" property="shippingWay" jdbcType="VARCHAR" />
+    <result column="tax_other_price" property="taxOtherPrice" jdbcType="DECIMAL" />
+    <result column="tax_reason" property="taxReason" jdbcType="VARCHAR" />
+    <result column="draw_bill_flag" property="drawBillFlag" jdbcType="BIT" />
+    <result column="bill_code" property="billCode" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
+    <result column="receiver_country" property="receiverCountry" jdbcType="VARCHAR" />
+    <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR" />
+    <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR" />
+    <result column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR" />
+    <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
+    <result column="discount_flag" property="discountFlag" jdbcType="BIT" />
+    <result column="integration" property="integration" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sub_order_no, purchase_count, product_code, product_name, product_price, product_sell_price,
+    product_attr, shipping_way, tax_other_price, tax_reason, draw_bill_flag, bill_code,
+    supplier_code, shop_id, receiver_name, receiver_mobile, receiver_country, receiver_province,
+    receiver_city, receiver_district, receiver_address, discount_flag, integration, create_time,
+    update_time, create_by, update_by, is_deleted
+  </sql>
+</mapper>

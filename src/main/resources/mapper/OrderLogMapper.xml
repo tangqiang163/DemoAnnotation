@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixeco.order.mapper.OrderLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sixeco.order.model.OrderLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="main_order_no" property="mainOrderNo" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sixeco.order.model.OrderLog" extends="BaseResultMap" >
+    <result column="order_data" property="orderData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, main_order_no, create_time, create_by
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_data
+  </sql>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixeco.order.mapper.SubOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.sixeco.order.model.SubOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="main_order_no" property="mainOrderNo" jdbcType="INTEGER" />
+    <result column="sub_order_no" property="subOrderNo" jdbcType="INTEGER" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="merchant_id" property="merchantId" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
+    <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
+    <result column="sub_original_amount" property="subOriginalAmount" jdbcType="DECIMAL" />
+    <result column="sub_amount" property="subAmount" jdbcType="DECIMAL" />
+    <result column="carriage_price" property="carriagePrice" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, main_order_no, sub_order_no, order_type, merchant_id, merchant_name, pay_type,
+    store_code, store_name, receiver_name, receiver_mobile, receiver_address, sub_original_amount,
+    sub_amount, carriage_price, create_time, update_time, create_by, update_by, is_deleted
+  </sql>
+</mapper>
