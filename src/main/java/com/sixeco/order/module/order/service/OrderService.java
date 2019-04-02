@@ -14,4 +14,6 @@ public interface OrderService {
 
     Object list();
 
+    Object detail(Long id);
+
 }

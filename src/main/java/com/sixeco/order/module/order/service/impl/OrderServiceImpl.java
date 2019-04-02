@@ -113,4 +113,9 @@ public class OrderServiceImpl implements OrderService {
         boolean empty = Iterables.isEmpty(emptyList);
         return mainOrderMapper.selectById(3);
     }
+
+    @Override
+    public Object detail(Long id) {
+        return null;
+    }
 }
