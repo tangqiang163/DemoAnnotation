@@ -67,47 +67,10 @@
       <result column="carriage_price" property="carriagePrice" jdbcType="DECIMAL" />
       <result column="s_create_time" property="createTime" jdbcType="TIMESTAMP" />
       <result column="s_update_time" property="updateTime" jdbcType="TIMESTAMP" />
-      <result column="s_createc__by" property="createBy" jdbcType="BIGINT" />
+      <result column="s_create_by" property="createBy" jdbcType="BIGINT" />
       <result column="s_update_by" property="updateBy" jdbcType="BIGINT" />
-      <collection column="id" property="carOrderItems" ofType="com.sixeco.order.model.vo.CarOrderItemVO" >
-        <id column="c_id" property="id" jdbcType="BIGINT" />
-        <result column="c_sub_order_no" property="subOrderNo" jdbcType="VARCHAR" />
-        <result column="c_item_no" property="itemNo" jdbcType="VARCHAR" />
-        <result column="purchase_count" property="purchaseCount" jdbcType="INTEGER" />
-        <result column="product_code" property="productCode" jdbcType="VARCHAR" />
-        <result column="product_name" property="productName" jdbcType="VARCHAR" />
-        <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
-        <result column="product_sell_price" property="productSellPrice" jdbcType="DECIMAL" />
-        <result column="product_attr" property="productAttr" jdbcType="VARCHAR" />
-        <result column="deposit" property="deposit" jdbcType="DECIMAL" />
-        <result column="state_subsidy" property="stateSubsidy" jdbcType="DECIMAL" />
-        <result column="local_subsidy" property="localSubsidy" jdbcType="DECIMAL" />
-        <result column="manufacturer_subsidy" property="manufacturerSubsidy" jdbcType="DECIMAL" />
-        <result column="shipping_way" property="shippingWay" jdbcType="VARCHAR" />
-        <result column="tax_other_price" property="taxOtherPrice" jdbcType="DECIMAL" />
-        <result column="tax_reason" property="taxReason" jdbcType="VARCHAR" />
-        <result column="draw_bill_flag" property="drawBillFlag" jdbcType="BIT" />
-        <result column="bill_code" property="billCode" jdbcType="VARCHAR" />
-        <result column="car_vsn" property="carVsn" jdbcType="VARCHAR" />
-        <result column="car_vin" property="carVin" jdbcType="VARCHAR" />
-        <result column="car_body_color" property="carBodyColor" jdbcType="VARCHAR" />
-        <result column="car_roof_color" property="carRoofColor" jdbcType="VARCHAR" />
-        <result column="car_interior_color" property="carInteriorColor" jdbcType="VARCHAR" />
-        <result column="car_part_info" property="carPartInfo" jdbcType="VARCHAR" />
-        <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
-        <result column="c_receiver_name" property="receiverName" jdbcType="VARCHAR" />
-        <result column="c_receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
-        <result column="receiver_country" property="receiverCountry" jdbcType="VARCHAR" />
-        <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR" />
-        <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR" />
-        <result column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR" />
-        <result column="c_receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
-        <result column="discount_flag" property="discountFlag" jdbcType="BIT" />
-        <result column="c_create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="c_update_time" property="updateTime" jdbcType="TIMESTAMP" />
-        <result column="c_create_by" property="createBy" jdbcType="BIGINT" />
-        <result column="c_update_by" property="updateBy" jdbcType="BIGINT" />
-      </collection>
+      <collection column="sub_order_no" property="carOrderItems" select="com.sixeco.order.mapper.SubOrderMapper.carListBySubOrderNo"/>
+      <collection column="sub_order_no" property="otherOrderItems" select="com.sixeco.order.mapper.SubOrderMapper.otherListBySubOrderNo"/>
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -298,54 +261,14 @@
       sub_order.create_time AS s_create_time,
       sub_order.update_time AS s_update_time,
       sub_order.create_by AS s_create_by,
-      sub_order.update_by AS s_update_by,
-      car_order_item.id AS c_id,
-      car_order_item.sub_order_no AS c_sub_order_no,
-      car_order_item.item_no AS c_item_no,
-      car_order_item.purchase_count,
-      car_order_item.product_code,
-      car_order_item.product_name,
-      car_order_item.product_price,
-      car_order_item.product_sell_price,
-      car_order_item.product_attr,
-      car_order_item.deposit,
-      car_order_item.state_subsidy,
-      car_order_item.local_subsidy,
-      car_order_item.manufacturer_subsidy,
-      car_order_item.shipping_way,
-      car_order_item.tax_other_price,
-      car_order_item.tax_reason,
-      car_order_item.draw_bill_flag,
-      car_order_item.bill_code,
-      car_order_item.car_vsn,
-      car_order_item.car_vin,
-      car_order_item.car_body_color,
-      car_order_item.car_roof_color,
-      car_order_item.car_interior_color,
-      car_order_item.car_part_info,
-      car_order_item.shop_id,
-      car_order_item.receiver_name AS c_receiver_name,
-      car_order_item.receiver_mobile AS c_receiver_mobile,
-      car_order_item.receiver_country,
-      car_order_item.receiver_province,
-      car_order_item.receiver_city,
-      car_order_item.receiver_district,
-      car_order_item.receiver_address AS c_receiver_address,
-      car_order_item.discount_flag,
-      car_order_item.create_time AS c_create_time,
-      car_order_item.update_time AS c_update_time,
-      car_order_item.create_by AS c_create_by,
-      car_order_item.update_by AS c_update_by
+      sub_order.update_by AS s_update_by
   FROM
       main_order,
-      sub_order,
-      car_order_item
+      sub_order
   WHERE
       main_order.main_order_no = sub_order.main_order_no
-      AND sub_order.sub_order_no = car_order_item.sub_order_no
       AND main_order.is_deleted = 0
       AND sub_order.is_deleted = 0
-      AND car_order_item.is_deleted = 0
       AND main_order.main_order_no = #{mainOrderNo}
   </select>
 </mapper>

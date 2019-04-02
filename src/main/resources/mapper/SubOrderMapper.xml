@@ -151,4 +151,22 @@
       </if>
     </trim>
   </insert>
+  <select id="carListBySubOrderNo" parameterType="string" resultType="com.sixeco.order.model.vo.CarOrderItemVO">
+    SELECT
+        *
+    FROM
+        car_order_item
+    WHERE
+        sub_order_no = #{subOrderNo}
+        AND is_deleted = 0
+  </select>
+  <select id="otherListBySubOrderNo" parameterType="string" resultType="com.sixeco.order.model.vo.OtherOrderItemVO">
+    SELECT
+        *
+    FROM
+        other_order_item
+    WHERE
+        sub_order_no = #{subOrderNo}
+        AND is_deleted = 0
+  </select>
 </mapper>
