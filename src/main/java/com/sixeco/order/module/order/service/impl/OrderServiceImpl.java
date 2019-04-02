@@ -1,6 +1,7 @@
 package com.sixeco.order.module.order.service.impl;
 
-import com.google.common.collect.Iterables;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.mapper.CarOrderItemMapper;
 import com.sixeco.order.mapper.MainOrderMapper;
 import com.sixeco.order.mapper.OtherOrderItemMapper;
@@ -18,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * 订单服务实现
@@ -108,10 +106,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Object list() {
-        List emptyList = Collections.EMPTY_LIST;
-        boolean empty = Iterables.isEmpty(emptyList);
-        return mainOrderMapper.selectById(3);
+    public Object list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
+        //分页，条件查询
+        QueryWrapper<MainOrder> wrapper = new QueryWrapper<MainOrder>()
+                .like("main_order_no", mainOrder.getMainOrderNo());
+        return mainOrderMapper.selectPage(pageInfo.getPage(), wrapper);
     }
 
     @Override

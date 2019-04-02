@@ -1,5 +1,7 @@
 package com.sixeco.order.module.order.service;
 
+import com.sixeco.order.base.context.PageInfo;
+import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
 
 /**
@@ -12,7 +14,7 @@ public interface OrderService {
 
     Object add(MainOrderDTO mainOrderDTO);
 
-    Object list();
+    Object list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder);
 
     Object detail(String mainOrderNo);
 

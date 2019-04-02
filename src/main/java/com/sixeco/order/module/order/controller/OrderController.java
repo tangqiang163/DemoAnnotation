@@ -1,7 +1,9 @@
 package com.sixeco.order.module.order.controller;
 
+import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.base.constant.RtnConstant;
 import com.sixeco.order.base.context.RtnInfo;
+import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
 import com.sixeco.order.module.order.service.OrderService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -47,8 +49,8 @@ public class OrderController {
     @ApiOperation(value="获取订单列表", notes="")
     @GetMapping("list")
     @ResponseBody
-    public RtnInfo list() {
-        return RtnInfo.success(orderService.list());
+    public RtnInfo list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
+        return RtnInfo.success(orderService.list(pageInfo, mainOrder));
     }
 
     @ApiOperation(value="获取订单详情", notes="")
