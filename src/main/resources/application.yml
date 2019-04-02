@@ -35,13 +35,15 @@ spring:
     port: 6379
     password:
     ## 最大链接数量
-    max-active: 300
-    ## 最长等待时间
-    max-wait: 10000
-    ## 最大阻塞数量
-    max-idle: 100
-    ## 最小阻塞时间
-    min-idle: 0
+    jedis:
+      pool:
+        max-active:  300
+        ## 最长等待时间
+        max-wait: 10000
+        ## 最大阻塞数量
+        max-idle: 100
+        ## 最小阻塞时间
+        min-idle: 0
     ## 连接超时时间（毫秒）
     timeout: 0
 ## mybatis-plus
@@ -55,7 +57,7 @@ mybatis-plus:
       #主键类型
       id-type: auto
       #字段策略
-      field-strategy: not_null
+      field-strategy: not-null
       #逻辑删除配置
       logic-delete-value: 1
       logic-not-delete-value: 0
