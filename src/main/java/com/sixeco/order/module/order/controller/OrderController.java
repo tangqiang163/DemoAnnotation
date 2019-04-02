@@ -54,8 +54,8 @@ public class OrderController {
     @ApiOperation(value="获取订单详情", notes="")
     @GetMapping("detail")
     @ResponseBody
-    public RtnInfo detail(Long id) {
-        return RtnInfo.success(orderService.detail(id));
+    public RtnInfo detail(String mainOrderNo) {
+        return RtnInfo.success(orderService.detail(mainOrderNo));
     }
 
 }

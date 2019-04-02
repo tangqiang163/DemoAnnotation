@@ -14,6 +14,6 @@ public interface OrderService {
 
     Object list();
 
-    Object detail(Long id);
+    Object detail(String mainOrderNo);
 
 }

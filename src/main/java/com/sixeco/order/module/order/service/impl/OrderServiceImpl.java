@@ -115,7 +115,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Object detail(Long id) {
-        return null;
+    public Object detail(String mainOrderNo) {
+        return mainOrderMapper.orderDetail(mainOrderNo);
     }
 }
