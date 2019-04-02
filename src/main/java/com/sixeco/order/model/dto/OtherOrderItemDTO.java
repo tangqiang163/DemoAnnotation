@@ -23,6 +23,10 @@ public class OtherOrderItemDTO {
 
     private String productCode;
 
+    private BigDecimal productPrice;
+
+    private BigDecimal productSellPrice;
+
     private String shippingWay;
 
     private BigDecimal taxOtherPrice;

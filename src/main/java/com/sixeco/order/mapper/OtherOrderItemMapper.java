@@ -11,5 +11,5 @@ import com.sixeco.order.model.OtherOrderItem;
  */
 public interface OtherOrderItemMapper extends BaseMapper<OtherOrderItem> {
 
-    void insertOtherOrderItem();
+    void insertOtherOrderItem(OtherOrderItem otherOrderItem);
 }

@@ -23,6 +23,10 @@ public class CarOrderItemDTO {
 
     private String productCode;
 
+    private BigDecimal productPrice;
+
+    private BigDecimal productSellPrice;
+
     private BigDecimal deposit;
 
     private String shippingWay;
