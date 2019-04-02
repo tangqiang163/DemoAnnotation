@@ -57,7 +57,7 @@ mybatis-plus:
       #主键类型
       id-type: auto
       #字段策略
-      field-strategy: not-null
+      field-strategy: not_null
       #逻辑删除配置
       logic-delete-value: 1
       logic-not-delete-value: 0
