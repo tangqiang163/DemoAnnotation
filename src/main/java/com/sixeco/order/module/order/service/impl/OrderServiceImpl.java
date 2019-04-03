@@ -113,12 +113,15 @@ public class OrderServiceImpl implements OrderService {
                     .receiverMobile(mainOrderDTO.getReceiverMobile())
                     .receiverName(mainOrderDTO.getReceiverName()).build();
             subOrderMapper.insertSubOrder(subOrder);
+            //根据id查询子订单号
+            String subOrderNo = subOrderMapper.selectById(subOrder.getId()).getSubOrderNo();
             //判断订单类型 此处具体情况再做修改
             if (OrderTypeEnum.CAR.getCode().equals(subOrderDTO.getOrderType())) {
                 //插入车
                 for (CarOrderItemDTO carOrderItemDTO : subOrderDTO.getCarItems()) {
                     CarOrderItem carOrderItem = CarOrderItem.builder()
-                            .subOrderNo(subOrder.getSubOrderNo())
+                            .subOrderNo(subOrderNo)
+                            .purchaseCount(carOrderItemDTO.getPurchaseCount())
                             .carBodyColor(carOrderItemDTO.getCarBodyColor())
                             .carInteriorColor(carOrderItemDTO.getCarInteriorColor())
                             .carPartInfo(carOrderItemDTO.getCarPartInfo())
@@ -134,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
                 //插入其他商品
                 for (OtherOrderItemDTO otherOrderItemDTO : subOrderDTO.getOtherItems()) {
                     OtherOrderItem otherOrderItem = OtherOrderItem.builder()
-                            .subOrderNo(subOrder.getSubOrderNo())
+                            .subOrderNo(subOrderNo)
                             .purchaseCount(otherOrderItemDTO.getPurchaseCount())
                             .productCode(otherOrderItemDTO.getProductCode())
                             .productName(otherOrderItemDTO.getProductName())

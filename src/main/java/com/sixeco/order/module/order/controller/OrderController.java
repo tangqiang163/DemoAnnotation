@@ -1,5 +1,7 @@
 package com.sixeco.order.module.order.controller;
 
+import com.sixeco.order.base.annotation.InsertOrderLog;
+import com.sixeco.order.base.annotation.UpdateOrderLog;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.base.constant.RtnConstant;
 import com.sixeco.order.base.context.RtnInfo;
@@ -40,7 +42,8 @@ public class OrderController {
     @ApiOperation(value="新增订单")
     @PostMapping("add")
     @ResponseBody
-    public RtnInfo add(@Validated MainOrderDTO mainOrderDTO, BindingResult result) {
+    @InsertOrderLog
+    public RtnInfo add(@Validated @RequestBody MainOrderDTO mainOrderDTO, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {
             List<ObjectError> errorList = result.getAllErrors();
@@ -94,7 +97,8 @@ public class OrderController {
     @ApiOperation(value = "修改订单")
     @GetMapping("update")
     @ResponseBody
-    public RtnInfo update(@Validated MainOrderUpdateDTO mainOrderUpdateDTO, BindingResult result) {
+    @UpdateOrderLog
+    public RtnInfo update(@Validated @RequestBody MainOrderUpdateDTO mainOrderUpdateDTO, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {
             List<ObjectError> errorList = result.getAllErrors();

@@ -28,7 +28,7 @@
     store_code, store_name, receiver_name, receiver_mobile, receiver_address, sub_original_amount,
     sub_amount, carriage_price, create_time, update_time, create_by, update_by, is_deleted
   </sql>
-  <insert id="insertSubOrder" parameterType="com.sixeco.order.model.SubOrder" >
+  <insert id="insertSubOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.sixeco.order.model.SubOrder" >
     insert into sub_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

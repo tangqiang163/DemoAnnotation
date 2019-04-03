@@ -24,7 +24,7 @@ public class OrderLog implements Serializable {
 
     private Long id;
 
-    private Integer mainOrderNo;
+    private String mainOrderNo;
 
     private LocalDateTime createTime;
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.sixeco.order.mapper.OrderLogMapper" >
   <resultMap id="BaseResultMap" type="com.sixeco.order.model.OrderLog" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="main_order_no" property="mainOrderNo" jdbcType="INTEGER" />
+    <result column="main_order_no" property="mainOrderNo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="BIGINT" />
   </resultMap>
