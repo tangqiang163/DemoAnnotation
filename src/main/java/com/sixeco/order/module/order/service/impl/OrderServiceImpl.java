@@ -12,10 +12,7 @@ import com.sixeco.order.model.CarOrderItem;
 import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.OtherOrderItem;
 import com.sixeco.order.model.SubOrder;
-import com.sixeco.order.model.dto.CarOrderItemDTO;
-import com.sixeco.order.model.dto.MainOrderDTO;
-import com.sixeco.order.model.dto.OtherOrderItemDTO;
-import com.sixeco.order.model.dto.SubOrderDTO;
+import com.sixeco.order.model.dto.*;
 import com.sixeco.order.model.vo.MainOrderVO;
 import com.sixeco.order.module.order.Enum.OrderStatusEnum;
 import com.sixeco.order.module.order.Enum.OrderTypeEnum;
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 订单服务实现
@@ -96,8 +92,7 @@ public class OrderServiceImpl implements OrderService {
                 .idNumber(mainOrderDTO.getIdNumber())
                 .remark(mainOrderDTO.getRemark())
                 .splitFlag(mainOrderDTO.getSplitFlag())
-                .splitPlan(mainOrderDTO.getSplitPlan())
-                .build();
+                .splitPlan(mainOrderDTO.getSplitPlan()).build();
         mainOrderMapper.insertMainOrder(mainOrder);
         //根据id查询订单号
         String mainOrderNo = mainOrderMapper.selectById(mainOrder.getId()).getMainOrderNo();
@@ -116,8 +111,7 @@ public class OrderServiceImpl implements OrderService {
                     .carriagePrice(subOrderDTO.getCarriagePrice())
                     .receiverAddress(mainOrderDTO.getReceiverAddress())
                     .receiverMobile(mainOrderDTO.getReceiverMobile())
-                    .receiverName(mainOrderDTO.getReceiverName())
-                    .build();
+                    .receiverName(mainOrderDTO.getReceiverName()).build();
             subOrderMapper.insertSubOrder(subOrder);
             //判断订单类型 此处具体情况再做修改
             if (OrderTypeEnum.CAR.getCode().equals(subOrderDTO.getOrderType())) {
@@ -133,8 +127,7 @@ public class OrderServiceImpl implements OrderService {
                             .carVin(carOrderItemDTO.getCarVin())
                             .receiverAddress(mainOrderDTO.getReceiverAddress())
                             .receiverMobile(mainOrderDTO.getReceiverMobile())
-                            .receiverName(mainOrderDTO.getReceiverName())
-                            .build();
+                            .receiverName(mainOrderDTO.getReceiverName()).build();
                     carOrderItemMapper.insertCarOrderItem(carOrderItem);
                 }
             } else {
@@ -164,8 +157,7 @@ public class OrderServiceImpl implements OrderService {
                             .receiverDistrict(mainOrderDTO.getReceiverDistrict())
                             .receiverAddress(mainOrderDTO.getReceiverAddress())
                             .receiverMobile(mainOrderDTO.getReceiverMobile())
-                            .receiverName(mainOrderDTO.getReceiverName())
-                            .build();
+                            .receiverName(mainOrderDTO.getReceiverName()).build();
                     otherOrderItemMapper.insertOtherOrderItem(otherOrderItem);
                 }
             }
@@ -202,5 +194,35 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public MainOrderVO detail(String mainOrderNo) {
         return mainOrderMapper.orderDetail(mainOrderNo);
+    }
+
+    @Override
+    public int updateStatus(Long id, Integer status) {
+        return mainOrderMapper.updateById(MainOrder.builder().id(id).orderStatus(status).build());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int update(MainOrderUpdateDTO mainOrderUpdateDTO) {
+        int result = 0;
+        result += mainOrderMapper.updateById(MainOrder.builder()
+                .id(mainOrderUpdateDTO.getId())
+                .mobile(mainOrderUpdateDTO.getMobile())
+                .idNumber(mainOrderUpdateDTO.getIdNumber()).build());
+        if (mainOrderUpdateDTO.getSubOrders() != null) {
+            for (SubOrderUpdateDTO subOrderUpdateDTO : mainOrderUpdateDTO.getSubOrders()) {
+                result += subOrderMapper.updateById(SubOrder.builder()
+                        .id(subOrderUpdateDTO.getId())
+                        .receiverName(subOrderUpdateDTO.getReceiverName())
+                        .receiverMobile(subOrderUpdateDTO.getReceiverMobile())
+                        .receiverAddress(subOrderUpdateDTO.getReceiverAddress())
+                        .storeName(subOrderUpdateDTO.getStoreName())
+                        .storeCode(subOrderUpdateDTO.getStoreCode())
+                        .merchantId(subOrderUpdateDTO.getMerchantId())
+                        .merchantName(subOrderUpdateDTO.getMerchantName())
+                        .payType(subOrderUpdateDTO.getPayType()).build());
+            }
+        }
+        return result;
     }
 }

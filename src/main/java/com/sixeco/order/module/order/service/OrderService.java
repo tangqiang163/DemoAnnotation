@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
+import com.sixeco.order.model.dto.MainOrderUpdateDTO;
 import com.sixeco.order.model.vo.MainOrderVO;
 
 /**
@@ -20,4 +21,7 @@ public interface OrderService {
 
     MainOrderVO detail(String mainOrderNo);
 
+    int updateStatus(Long id, Integer status);
+
+    int update(MainOrderUpdateDTO mainOrderUpdateDTO);
 }

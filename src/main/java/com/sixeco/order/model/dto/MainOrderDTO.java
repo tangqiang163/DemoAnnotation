@@ -5,7 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -32,10 +33,10 @@ public class MainOrderDTO {
 
     private Integer equipment;
 
-    @NotNull(message = "电话号码不能为空")
+    @NotBlank(message = "电话号码不能为空")
     private String mobile;
 
-    @NotNull(message = "身份证号不能为空")
+    @NotBlank(message = "身份证号不能为空")
     private String idNumber;
 
     private String receiverProvince;
@@ -56,5 +57,6 @@ public class MainOrderDTO {
 
     private String remark;
 
+    @Size(min = 1, message = "至少有一个子订单")
     private List<SubOrderDTO> subOrders;
 }
