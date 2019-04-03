@@ -7,6 +7,7 @@ import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
 import com.sixeco.order.model.dto.MainOrderUpdateDTO;
 import com.sixeco.order.module.order.service.OrderService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +28,7 @@ import java.util.List;
  * @author: Zhanghe
  * @date: 2019-03-28
  */
+@Api(value = "订单接口")
 @RestController
 @RequestMapping("order")
 @Slf4j
@@ -35,8 +37,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @ApiOperation(value="新增订单", notes="")
-    @ApiImplicitParam(name = "mainOrderDTO", value = "订单DTO", required = true, dataType = "mainOrderDTO")
+    @ApiOperation(value="新增订单")
     @PostMapping("add")
     @ResponseBody
     public RtnInfo add(@Validated MainOrderDTO mainOrderDTO, BindingResult result) {
@@ -50,15 +51,14 @@ public class OrderController {
         return RtnInfo.success(orderService.add(mainOrderDTO));
     }
 
-    @ApiOperation(value="获取订单列表", notes="")
-    @ApiImplicitParam(name = "PageInfo", value = "分页对象", required = true, dataType = "PageInfo")
+    @ApiOperation(value="获取订单列表")
     @GetMapping("list")
     @ResponseBody
     public RtnInfo list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
         return RtnInfo.success(orderService.list(pageInfo, mainOrder));
     }
 
-    @ApiOperation(value="获取订单详情", notes="")
+    @ApiOperation(value="获取订单详情", notes="分页")
     @ApiImplicitParam(name = "mainOrderNo", value = "订单号", required = true, dataType = "String")
     @GetMapping("detail")
     @ResponseBody
@@ -73,10 +73,10 @@ public class OrderController {
         return RtnInfo.success(orderService.detail(mainOrderNo));
     }
 
-    @ApiOperation(value = "修改订单状态", notes = "")
+    @ApiOperation(value = "修改订单状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "订单id", required = true, dataType = "Long"),
-            @ApiImplicitParam(name = "status", value = "订单状态", required = true, dataType = "Integer")
+            @ApiImplicitParam(name = "id", value = "订单id", required = true, dataType = "Long", example = "1"),
+            @ApiImplicitParam(name = "status", value = "订单状态", required = true, dataType = "Integer", example = "1")
     })
     @GetMapping("updateStatus")
     @ResponseBody
@@ -91,8 +91,7 @@ public class OrderController {
         return RtnInfo.success(orderService.updateStatus(id, status));
     }
 
-    @ApiOperation(value = "修改订单", notes = "")
-    @ApiImplicitParam(name = "MainOrderUpdateDTO", value = "订单更新DTO", required = true, dataType = "MainOrderUpdateDTO")
+    @ApiOperation(value = "修改订单")
     @GetMapping("update")
     @ResponseBody
     public RtnInfo update(@Validated MainOrderUpdateDTO mainOrderUpdateDTO, BindingResult result) {

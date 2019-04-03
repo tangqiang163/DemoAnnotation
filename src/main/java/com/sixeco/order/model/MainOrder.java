@@ -2,6 +2,7 @@ package com.sixeco.order.model;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
  * @author: Zhanghe
  * @date: 2019-03-28
  */
+@ApiModel(value = "订单对象")
 @Data
 @Builder
 @NoArgsConstructor
