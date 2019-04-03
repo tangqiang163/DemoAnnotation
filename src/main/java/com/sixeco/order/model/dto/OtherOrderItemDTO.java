@@ -23,11 +23,17 @@ public class OtherOrderItemDTO {
 
     private String productCode;
 
+    private String productName;
+
     private BigDecimal productPrice;
 
     private BigDecimal productSellPrice;
 
+    private String productAttr;
+
     private String shippingWay;
+
+    private String orderLogisticsId;
 
     private BigDecimal taxOtherPrice;
 
@@ -42,6 +48,8 @@ public class OtherOrderItemDTO {
     private String shopId;
 
     private Boolean discountFlag;
+
+    private Integer accountType;
 
     private Integer integration;
 }

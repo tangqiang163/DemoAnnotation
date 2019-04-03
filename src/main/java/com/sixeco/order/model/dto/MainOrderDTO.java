@@ -38,6 +38,12 @@ public class MainOrderDTO {
     @NotNull(message = "身份证号不能为空")
     private String idNumber;
 
+    private String receiverProvince;
+
+    private String receiverCity;
+
+    private String receiverDistrict;
+
     private String receiverName;
 
     private String receiverMobile;

@@ -1,7 +1,8 @@
 package com.sixeco.order.module.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.google.common.collect.Iterables;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.google.common.base.Strings;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.mapper.CarOrderItemMapper;
 import com.sixeco.order.mapper.MainOrderMapper;
@@ -15,6 +16,7 @@ import com.sixeco.order.model.dto.CarOrderItemDTO;
 import com.sixeco.order.model.dto.MainOrderDTO;
 import com.sixeco.order.model.dto.OtherOrderItemDTO;
 import com.sixeco.order.model.dto.SubOrderDTO;
+import com.sixeco.order.model.vo.MainOrderVO;
 import com.sixeco.order.module.order.Enum.OrderStatusEnum;
 import com.sixeco.order.module.order.Enum.OrderTypeEnum;
 import com.sixeco.order.module.order.service.OrderService;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 订单服务实现
@@ -49,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object add(MainOrderDTO mainOrderDTO) {
+    public MainOrder add(MainOrderDTO mainOrderDTO) {
         //TODO 验证入参UUID log处理
         //计算购买商品总数
         //计算主订单和子订单金额，根据明细金额计算
@@ -121,6 +124,7 @@ public class OrderServiceImpl implements OrderService {
                 //插入车
                 for (CarOrderItemDTO carOrderItemDTO : subOrderDTO.getCarItems()) {
                     CarOrderItem carOrderItem = CarOrderItem.builder()
+                            .subOrderNo(subOrder.getSubOrderNo())
                             .carBodyColor(carOrderItemDTO.getCarBodyColor())
                             .carInteriorColor(carOrderItemDTO.getCarInteriorColor())
                             .carPartInfo(carOrderItemDTO.getCarPartInfo())
@@ -133,10 +137,31 @@ public class OrderServiceImpl implements OrderService {
                             .build();
                     carOrderItemMapper.insertCarOrderItem(carOrderItem);
                 }
-            } else if (OrderTypeEnum.SERVICE.getCode().equals(subOrderDTO.getOrderType())) {
+            } else {
                 //插入其他商品
                 for (OtherOrderItemDTO otherOrderItemDTO : subOrderDTO.getOtherItems()) {
                     OtherOrderItem otherOrderItem = OtherOrderItem.builder()
+                            .subOrderNo(subOrder.getSubOrderNo())
+                            .purchaseCount(otherOrderItemDTO.getPurchaseCount())
+                            .productCode(otherOrderItemDTO.getProductCode())
+                            .productName(otherOrderItemDTO.getProductName())
+                            .productPrice(otherOrderItemDTO.getProductPrice())
+                            .productSellPrice(otherOrderItemDTO.getProductSellPrice())
+                            .productAttr(otherOrderItemDTO.getProductAttr())
+                            .drawBillFlag(otherOrderItemDTO.getDrawBillFlag())
+                            .billCode(otherOrderItemDTO.getBillCode())
+                            .supplierCode(otherOrderItemDTO.getSupplierCode())
+                            .shippingWay(otherOrderItemDTO.getShippingWay())
+                            .orderLogisticsId(otherOrderItemDTO.getOrderLogisticsId())
+                            .taxOtherPrice(otherOrderItemDTO.getTaxOtherPrice())
+                            .taxReason(otherOrderItemDTO.getTaxReason())
+                            .shopId(otherOrderItemDTO.getShopId())
+                            .discountFlag(otherOrderItemDTO.getDiscountFlag())
+                            .accountType(otherOrderItemDTO.getAccountType())
+                            .receiverCountry("0")
+                            .receiverProvince(mainOrderDTO.getReceiverProvince())
+                            .receiverCity(mainOrderDTO.getReceiverCity())
+                            .receiverDistrict(mainOrderDTO.getReceiverDistrict())
                             .receiverAddress(mainOrderDTO.getReceiverAddress())
                             .receiverMobile(mainOrderDTO.getReceiverMobile())
                             .receiverName(mainOrderDTO.getReceiverName())
@@ -150,15 +175,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Object list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
+    public IPage<MainOrder> list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
         //分页，条件查询
-        QueryWrapper<MainOrder> wrapper = new QueryWrapper<MainOrder>()
-                .like("main_order_no", mainOrder.getMainOrderNo());
+        QueryWrapper<MainOrder> wrapper = new QueryWrapper<>();
+        if (!Strings.isNullOrEmpty(mainOrder.getMainOrderNo())) {
+            wrapper.like("main_order_no", mainOrder.getMainOrderNo());
+        }
+        if (!Strings.isNullOrEmpty(mainOrder.getMobile())) {
+            wrapper.like("mobile", mainOrder.getMobile());
+        }
+        if (!Strings.isNullOrEmpty(mainOrder.getIdNumber())) {
+            wrapper.like("id_number", mainOrder.getIdNumber());
+        }
+        if (!Strings.isNullOrEmpty(mainOrder.getPurchaserId())) {
+            wrapper.like("purchaser_id", mainOrder.getPurchaserId());
+        }
+        if (!Strings.isNullOrEmpty(mainOrder.getPurchaserName())) {
+            wrapper.like("purchaser_name", mainOrder.getPurchaserName());
+        }
+        if (!Strings.isNullOrEmpty(mainOrder.getUserIdTdc())) {
+            wrapper.like("user_id_tdc", mainOrder.getUserIdTdc());
+        }
         return mainOrderMapper.selectPage(pageInfo.getPage(), wrapper);
     }
 
     @Override
-    public Object detail(String mainOrderNo) {
+    public MainOrderVO detail(String mainOrderNo) {
         return mainOrderMapper.orderDetail(mainOrderNo);
     }
 }

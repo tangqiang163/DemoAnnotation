@@ -12,6 +12,7 @@
     <result column="product_sell_price" property="productSellPrice" jdbcType="DECIMAL" />
     <result column="product_attr" property="productAttr" jdbcType="VARCHAR" />
     <result column="shipping_way" property="shippingWay" jdbcType="VARCHAR" />
+    <result column="order_logistics_id" property="orderLogisticsId" jdbcType="VARCHAR" />
     <result column="tax_other_price" property="taxOtherPrice" jdbcType="DECIMAL" />
     <result column="tax_reason" property="taxReason" jdbcType="VARCHAR" />
     <result column="draw_bill_flag" property="drawBillFlag" jdbcType="BIT" />
@@ -26,6 +27,7 @@
     <result column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR" />
     <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
     <result column="discount_flag" property="discountFlag" jdbcType="BIT" />
+    <result column="account_type" property="accountType" jdbcType="INTEGER" />
     <result column="integration" property="integration" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -35,7 +37,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, sub_order_no, item_no, purchase_count, product_code, product_name, product_price, product_sell_price,
-    product_attr, shipping_way, tax_other_price, tax_reason, draw_bill_flag, bill_code,
+    product_attr, shipping_way, order_logistics_id, tax_other_price, tax_reason, draw_bill_flag, bill_code,
     supplier_code, shop_id, receiver_name, receiver_mobile, receiver_country, receiver_province,
     receiver_city, receiver_district, receiver_address, discount_flag, integration, create_time,
     update_time, create_by, update_by, is_deleted
@@ -70,6 +72,9 @@
       </if>
       <if test="shippingWay != null" >
         shipping_way,
+      </if>
+      <if test="otherLogisticsId != null" >
+        order_logistics_id,
       </if>
       <if test="taxOtherPrice != null" >
         tax_other_price,
@@ -112,6 +117,9 @@
       </if>
       <if test="discountFlag != null" >
         discount_flag,
+      </if>
+      <if test="accountType != null" >
+        account_type,
       </if>
       <if test="integration != null" >
         integration,
@@ -161,6 +169,9 @@
       <if test="shippingWay != null" >
         #{shippingWay,jdbcType=VARCHAR},
       </if>
+      <if test="orderLogisticsId != null">
+        #{orderLogisticsId,jdbcType=VARCHAR}
+      </if>
       <if test="taxOtherPrice != null" >
         #{taxOtherPrice,jdbcType=DECIMAL},
       </if>
@@ -202,6 +213,9 @@
       </if>
       <if test="discountFlag != null" >
         #{discountFlag,jdbcType=BIT},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=INTEGER},
       </if>
       <if test="integration != null" >
         #{integration,jdbcType=INTEGER},

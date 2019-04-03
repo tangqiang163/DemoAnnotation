@@ -44,6 +44,8 @@ public class OtherOrderItem implements Serializable {
 
     private String shippingWay;
 
+    private String orderLogisticsId;
+
     private BigDecimal taxOtherPrice;
 
     private String taxReason;
@@ -71,6 +73,8 @@ public class OtherOrderItem implements Serializable {
     private String receiverAddress;
 
     private Boolean discountFlag;
+
+    private Integer accountType;
 
     private Integer integration;
 

@@ -1,8 +1,10 @@
 package com.sixeco.order.module.order.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
+import com.sixeco.order.model.vo.MainOrderVO;
 
 /**
  * 订单服务
@@ -12,10 +14,10 @@ import com.sixeco.order.model.dto.MainOrderDTO;
  */
 public interface OrderService {
 
-    Object add(MainOrderDTO mainOrderDTO);
+    MainOrder add(MainOrderDTO mainOrderDTO);
 
-    Object list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder);
+    IPage<MainOrder> list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder);
 
-    Object detail(String mainOrderNo);
+    MainOrderVO detail(String mainOrderNo);
 
 }
