@@ -12,15 +12,10 @@ import com.sixeco.order.model.dto.MainOrderUpdateDTO;
 import com.sixeco.order.module.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Arrays;
 
 /**
  * 订单日志切面
@@ -54,8 +49,8 @@ public class OrderLogAspect extends BaseAspect {
                 .createBy(order.getCreateBy()).build());
     }
 
-    @Around("@annotation(com.sixeco.order.base.annotation.UpdateOrderLog)")
-    public void updateOrderLog(ProceedingJoinPoint joinPoint) throws JsonProcessingException {
+    @AfterReturning("@annotation(com.sixeco.order.base.annotation.UpdateOrderLog)")
+    public void updateOrderLog(JoinPoint joinPoint) throws JsonProcessingException {
         Object[] args = joinPoint.getArgs();
         MainOrderUpdateDTO o = (MainOrderUpdateDTO) args[0];
         MainOrder order = mainOrderMapper.selectById(o.getId());
