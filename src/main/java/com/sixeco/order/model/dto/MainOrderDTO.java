@@ -1,5 +1,6 @@
 package com.sixeco.order.model.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author: Zhanghe
  * @date: 2019-03-28
  */
+@ApiModel(value = "主订单DTO")
 @Data
 @Builder
 @NoArgsConstructor
