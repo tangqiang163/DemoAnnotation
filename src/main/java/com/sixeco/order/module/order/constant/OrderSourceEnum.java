@@ -1,4 +1,4 @@
-package com.sixeco.order.module.order.Enum;
+package com.sixeco.order.module.order.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
