@@ -46,6 +46,9 @@ public class RtnConstant {
 
         public static final Integer UPDATE_PAPERNUM_FAIL = 201;
 
+        // 重复提交
+        public static final Integer REPEAT_SUBMIT = 108;
+
     }
 
     /**
@@ -81,10 +84,13 @@ public class RtnConstant {
         // 密码错误返回信息
         public static final String PASSWORD_ERROR_MSG = "密码错误";
 
-        // 修改失败
+        // 修改失败信息
         public static final String UPDATE_ERROR_MSG = "修改失败";
 
         public static final String NOT_DELETED = "该数据无法删除";
+
+        // 重复提交信息
+        public static final String REPEAT_SUBMIT = "请求重复提交";
 
     }
 }

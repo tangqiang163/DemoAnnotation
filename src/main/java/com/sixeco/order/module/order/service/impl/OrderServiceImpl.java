@@ -49,7 +49,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MainOrder add(MainOrderDTO mainOrderDTO) {
-        //TODO 验证入参UUID log处理
         //计算购买商品总数
         //计算主订单和子订单金额，根据明细金额计算
         int count = 0;

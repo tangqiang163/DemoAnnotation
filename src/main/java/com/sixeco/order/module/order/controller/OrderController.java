@@ -1,6 +1,7 @@
 package com.sixeco.order.module.order.controller;
 
 import com.sixeco.order.base.annotation.InsertOrderLog;
+import com.sixeco.order.base.annotation.NoRepeatSubmit;
 import com.sixeco.order.base.annotation.UpdateOrderLog;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.base.constant.RtnConstant;
@@ -43,6 +44,7 @@ public class OrderController {
     @PostMapping("add")
     @ResponseBody
     @InsertOrderLog
+    @NoRepeatSubmit
     public RtnInfo add(@Validated @RequestBody MainOrderDTO mainOrderDTO, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {

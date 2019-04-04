@@ -15,7 +15,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * 订单日志切面
@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2019-04-03
  */
 @Aspect
-@Configuration
+@Component
 @Slf4j
 public class OrderLogAspect extends BaseAspect {
 
