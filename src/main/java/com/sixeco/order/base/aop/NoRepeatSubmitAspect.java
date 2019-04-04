@@ -1,6 +1,6 @@
 package com.sixeco.order.base.aop;
 
-import com.sixeco.order.base.annotation.NoRepeatSubmit;
+import com.sixeco.order.base.constant.RtnConstant;
 import com.sixeco.order.base.context.RtnInfo;
 import com.sixeco.order.module.redis.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +41,7 @@ public class NoRepeatSubmitAspect extends BaseAspect {
                 redisService.set(key, 0, 2000L);
                 return o;
             }
-            log.error("重复提交");
-            return null;
+            return RtnInfo.error(RtnConstant.Code.REPEAT_SUBMIT, RtnConstant.Msg.REPEAT_SUBMIT);
         } catch (Throwable e) {
             log.error("验证重复提交时出现异常");
             return RtnInfo.SERVER_ERROR;
