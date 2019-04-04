@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sixeco.order.model.SubOrder;
 import com.sixeco.order.model.vo.CarOrderItemVO;
 import com.sixeco.order.model.vo.OtherOrderItemVO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: Zhanghe
  * @date: 2019-03-28
  */
+@Mapper
 public interface SubOrderMapper extends BaseMapper<SubOrder> {
 
     void insertSubOrder(SubOrder subOrder);

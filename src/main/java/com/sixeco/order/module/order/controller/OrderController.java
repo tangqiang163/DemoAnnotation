@@ -1,8 +1,6 @@
 package com.sixeco.order.module.order.controller;
 
-import com.sixeco.order.base.annotation.InsertOrderLog;
-import com.sixeco.order.base.annotation.NoRepeatSubmit;
-import com.sixeco.order.base.annotation.UpdateOrderLog;
+import com.sixeco.order.base.annotation.*;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.base.constant.RtnConstant;
 import com.sixeco.order.base.context.RtnInfo;
@@ -45,6 +43,7 @@ public class OrderController {
     @ResponseBody
     @InsertOrderLog
     @NoRepeatSubmit
+    @DecryptRequest
     public RtnInfo add(@Validated @RequestBody MainOrderDTO mainOrderDTO, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {
@@ -67,6 +66,7 @@ public class OrderController {
     @ApiImplicitParam(name = "mainOrderNo", value = "订单号", required = true, dataType = "String")
     @GetMapping("detail")
     @ResponseBody
+    @EncryptResponse
     public RtnInfo detail(@NotEmpty(message = "必须传入id") String mainOrderNo, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {
@@ -85,6 +85,7 @@ public class OrderController {
     })
     @GetMapping("updateStatus")
     @ResponseBody
+    @DecryptRequest
     public RtnInfo updateStatus(@NotNull(message = "必须传入id") Long id, @NotNull(message = "必须传入修改状态") Integer status, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {
@@ -100,6 +101,7 @@ public class OrderController {
     @GetMapping("update")
     @ResponseBody
     @UpdateOrderLog
+    @DecryptRequest
     public RtnInfo update(@Validated @RequestBody MainOrderUpdateDTO mainOrderUpdateDTO, BindingResult result) {
         //检验参数
         if (result.hasErrors()) {

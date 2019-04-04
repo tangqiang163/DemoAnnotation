@@ -38,7 +38,7 @@ public class NoRepeatSubmitAspect extends BaseAspect {
                 redisService.set(key, 0, 2000L);
                 return proceedingJoinPoint.proceed();
             }
-            log.error("重复提交");
+            log.info("重复提交");
             return RtnInfo.error(RtnConstant.Code.REPEAT_SUBMIT, RtnConstant.Msg.REPEAT_SUBMIT);
         } catch (Throwable e) {
             log.error("验证重复提交时出现异常");
