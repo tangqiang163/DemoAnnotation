@@ -32,15 +32,13 @@ public class NoRepeatSubmitAspect extends BaseAspect {
     public Object checkRepeatSubmit(ProceedingJoinPoint proceedingJoinPoint) {
         try {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
-            HttpServletRequest request = attributes.getRequest();
-            String key = sessionId + "-" + request.getServletPath();
+            String key = RequestContextHolder.getRequestAttributes().getSessionId() + "-" + attributes.getRequest().getServletPath();
             // 如果缓存中有这个url视为重复提交
             if (redisService.get(key) == null) {
-                Object o = proceedingJoinPoint.proceed();
                 redisService.set(key, 0, 2000L);
-                return o;
+                return proceedingJoinPoint.proceed();
             }
+            log.error("重复提交");
             return RtnInfo.error(RtnConstant.Code.REPEAT_SUBMIT, RtnConstant.Msg.REPEAT_SUBMIT);
         } catch (Throwable e) {
             log.error("验证重复提交时出现异常");

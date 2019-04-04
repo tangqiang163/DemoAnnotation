@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum OrderSourceEnum {
 
+    // 订单来源
     IOS("A1", "IOS"),
     COOL_SCREEN("A2", "酷屏"),
     MINI_APP("A3", "工会小程序"),

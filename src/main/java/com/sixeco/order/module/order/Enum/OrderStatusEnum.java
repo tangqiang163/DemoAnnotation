@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum OrderStatusEnum {
 
+    // 订单状态
     PENDING_PAYMENT(1, "待付款"),
     CANCELLED(2, "已取消"),
     DEPOSIT_PAID(3, "已付定金"),
