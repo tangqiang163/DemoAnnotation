@@ -1,5 +1,6 @@
 package com.sixeco.order.module.order.controller;
 
+import com.google.common.base.Strings;
 import com.sixeco.order.base.annotation.*;
 import com.sixeco.order.base.context.PageInfo;
 import com.sixeco.order.base.constant.RtnConstant;
@@ -19,8 +20,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -55,25 +54,22 @@ public class OrderController {
         return RtnInfo.success(orderService.add(mainOrderDTO));
     }
 
-    @ApiOperation(value="获取订单列表")
+    @ApiOperation(value="获取订单列表", notes="分页")
     @GetMapping("list")
     @ResponseBody
     public RtnInfo list(PageInfo<MainOrder> pageInfo, MainOrder mainOrder) {
         return RtnInfo.success(orderService.list(pageInfo, mainOrder));
     }
 
-    @ApiOperation(value="获取订单详情", notes="分页")
+    @ApiOperation(value="获取订单详情")
     @ApiImplicitParam(name = "mainOrderNo", value = "订单号", required = true, dataType = "String")
     @GetMapping("detail")
     @ResponseBody
     @EncryptResponse
-    public RtnInfo detail(@NotEmpty(message = "必须传入id") String mainOrderNo, BindingResult result) {
+    public RtnInfo detail(String mainOrderNo) {
         //检验参数
-        if (result.hasErrors()) {
-            List<ObjectError> errorList = result.getAllErrors();
-            for (ObjectError error : errorList) {
-                return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, error.getDefaultMessage());
-            }
+        if(Strings.isNullOrEmpty(mainOrderNo)) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入id");
         }
         return RtnInfo.success(orderService.detail(mainOrderNo));
     }
@@ -86,13 +82,13 @@ public class OrderController {
     @GetMapping("updateStatus")
     @ResponseBody
     @DecryptRequest
-    public RtnInfo updateStatus(@NotNull(message = "必须传入id") Long id, @NotNull(message = "必须传入修改状态") Integer status, BindingResult result) {
+    public RtnInfo updateStatus(Long id, Integer status) {
         //检验参数
-        if (result.hasErrors()) {
-            List<ObjectError> errorList = result.getAllErrors();
-            for (ObjectError error : errorList) {
-                return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, error.getDefaultMessage());
-            }
+        if (id == null) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入id");
+        }
+        if (status == null) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入修改状态");
         }
         return RtnInfo.success(orderService.updateStatus(id, status));
     }
