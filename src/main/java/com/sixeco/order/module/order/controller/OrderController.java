@@ -20,7 +20,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -67,13 +66,10 @@ public class OrderController {
     @GetMapping("detail")
     @ResponseBody
     @EncryptResponse
-    public RtnInfo detail(@Validated @NotNull(message = "必须传入订单号") String mainOrderNo, BindingResult result) {
+    public RtnInfo detail(String mainOrderNo) {
         //检验参数
-        if (result.hasErrors()) {
-            List<ObjectError> errorList = result.getAllErrors();
-            for (ObjectError error : errorList) {
-                return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, error.getDefaultMessage());
-            }
+        if (Strings.isNullOrEmpty(mainOrderNo)) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入订单号");
         }
         return RtnInfo.success(orderService.detail(mainOrderNo));
     }
@@ -86,13 +82,13 @@ public class OrderController {
     @GetMapping("updateStatus")
     @ResponseBody
     @DecryptRequest
-    public RtnInfo updateStatus(@Validated @NotNull(message = "必须传入id") Long id, @NotNull(message = "必须传入修改状态") Integer status, BindingResult result) {
+    public RtnInfo updateStatus(Long id, Integer status) {
         //检验参数
-        if (result.hasErrors()) {
-            List<ObjectError> errorList = result.getAllErrors();
-            for (ObjectError error : errorList) {
-                return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, error.getDefaultMessage());
-            }
+        if (id == null) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入id");
+        }
+        if (status == null) {
+            return RtnInfo.error(RtnConstant.Code.PARAMS_LACK_CODE, "必须传入修改状态");
         }
         return RtnInfo.success(orderService.updateStatus(id, status));
     }
