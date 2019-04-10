@@ -5,11 +5,10 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="sub_order_no" property="subOrderNo" jdbcType="VARCHAR" />
     <result column="item_no" property="itemNo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
     <result column="purchase_count" property="purchaseCount" jdbcType="INTEGER" />
     <result column="product_code" property="productCode" jdbcType="VARCHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
-    <result column="product_price" property="productPrice" jdbcType="DECIMAL" />
-    <result column="product_sell_price" property="productSellPrice" jdbcType="DECIMAL" />
     <result column="product_attr" property="productAttr" jdbcType="VARCHAR" />
     <result column="deposit" property="deposit" jdbcType="DECIMAL" />
     <result column="state_subsidy" property="stateSubsidy" jdbcType="DECIMAL" />
@@ -42,7 +41,7 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sub_order_no, item_no, purchase_count, product_code, product_name, product_price, product_sell_price,
+    id, sub_order_no, item_no, type, purchase_count, product_code, product_name,
     product_attr, deposit, state_subsidy, local_subsidy, manufacturer_subsidy, shipping_way,
     tax_other_price, tax_reason, draw_bill_flag, bill_code, car_vsn, car_vin, car_body_color,
     car_roof_color, car_interior_color, car_part_info, shop_id, receiver_name, receiver_mobile,
@@ -59,6 +58,9 @@
         sub_order_no,
       </if>
         item_no,
+      <if test="type != null" >
+        type,
+      </if>
       <if test="purchaseCount != null" >
         purchase_count,
       </if>
@@ -67,12 +69,6 @@
       </if>
       <if test="productName != null" >
         product_name,
-      </if>
-      <if test="productPrice != null" >
-        product_price,
-      </if>
-      <if test="productSellPrice != null" >
-        product_sell_price,
       </if>
       <if test="productAttr != null" >
         product_attr,
@@ -173,6 +169,9 @@
         #{subOrderNo,jdbcType=VARCHAR},
       </if>
         CONCAT( 'C', DATE_FORMAT( NOW(), '%Y%m%d%H%i%s' ), CEILING( RAND( ) * 90000+10000 ) ),
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
       <if test="purchaseCount != null" >
         #{purchaseCount,jdbcType=INTEGER},
       </if>
@@ -181,12 +180,6 @@
       </if>
       <if test="productName != null" >
         #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productPrice != null" >
-        #{productPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="productSellPrice != null" >
-        #{productSellPrice,jdbcType=DECIMAL},
       </if>
       <if test="productAttr != null" >
         #{productAttr,jdbcType=VARCHAR},

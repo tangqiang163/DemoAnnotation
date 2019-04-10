@@ -7,9 +7,6 @@
     <result column="source" property="source" jdbcType="CHAR" />
     <result column="equipment" property="equipment" jdbcType="INTEGER" />
     <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
-    <result column="product_count" property="productCount" jdbcType="INTEGER" />
-    <result column="original_amount" property="originalAmount" jdbcType="DECIMAL" />
-    <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="user_id_tdc" property="userIdTdc" jdbcType="VARCHAR" />
     <result column="purchaser_id" property="purchaserId" jdbcType="VARCHAR" />
     <result column="purchaser_name" property="purchaserName" jdbcType="VARCHAR" />
@@ -32,9 +29,6 @@
     <result column="source" property="source" jdbcType="CHAR" />
     <result column="equipment" property="equipment" jdbcType="INTEGER" />
     <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
-    <result column="product_count" property="productCount" jdbcType="INTEGER" />
-    <result column="original_amount" property="originalAmount" jdbcType="DECIMAL" />
-    <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="user_id_tdc" property="userIdTdc" jdbcType="VARCHAR" />
     <result column="purchaser_id" property="purchaserId" jdbcType="VARCHAR" />
     <result column="purchaser_name" property="purchaserName" jdbcType="VARCHAR" />
@@ -62,9 +56,6 @@
       <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
       <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
       <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
-      <result column="sub_original_amount" property="subOriginalAmount" jdbcType="DECIMAL" />
-      <result column="sub_amount" property="subAmount" jdbcType="DECIMAL" />
-      <result column="carriage_price" property="carriagePrice" jdbcType="DECIMAL" />
       <result column="s_create_time" property="createTime" jdbcType="TIMESTAMP" />
       <result column="s_update_time" property="updateTime" jdbcType="TIMESTAMP" />
       <result column="s_create_by" property="createBy" jdbcType="BIGINT" />
@@ -74,10 +65,9 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, main_order_no, source, equipment, order_status, product_count, original_amount,
-    amount, user_id_tdc, purchaser_id, purchaser_name, mobile, id_number, settlement_status,
-    settled_time, split_flag, split_plan, remark, create_time, update_time, create_by,
-    update_by, is_deleted
+    id, main_order_no, source, equipment, order_status, user_id_tdc, purchaser_id,
+    purchaser_name, mobile, id_number, settlement_status, settled_time, split_flag,
+    split_plan, remark, create_time, update_time, create_by, update_by, is_deleted
   </sql>
   <insert id="insertMainOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.sixeco.order.model.MainOrder" >
     insert into main_order
@@ -94,15 +84,6 @@
       </if>
       <if test="orderStatus != null" >
         order_status,
-      </if>
-      <if test="productCount != null" >
-        product_count,
-      </if>
-      <if test="originalAmount != null" >
-        original_amount,
-      </if>
-      <if test="amount != null" >
-        amount,
       </if>
       <if test="userIdTdc != null" >
         user_id_tdc,
@@ -164,15 +145,6 @@
       <if test="orderStatus != null" >
         #{orderStatus,jdbcType=TINYINT},
       </if>
-      <if test="productCount != null" >
-        #{productCount,jdbcType=INTEGER},
-      </if>
-      <if test="originalAmount != null" >
-        #{originalAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="amount != null" >
-        #{amount,jdbcType=DECIMAL},
-      </if>
       <if test="userIdTdc != null" >
         #{userIdTdc,jdbcType=VARCHAR},
       </if>
@@ -227,9 +199,6 @@
       main_order.source,
       main_order.equipment,
       main_order.order_status,
-      main_order.product_count,
-      main_order.original_amount,
-      main_order.amount,
       main_order.user_id_tdc,
       main_order.purchaser_id,
       main_order.mobile,
@@ -255,9 +224,6 @@
       sub_order.receiver_name,
       sub_order.receiver_mobile,
       sub_order.receiver_address,
-      sub_order.sub_original_amount,
-      sub_order.sub_amount,
-      sub_order.carriage_price,
       sub_order.create_time AS s_create_time,
       sub_order.update_time AS s_update_time,
       sub_order.create_by AS s_create_by,

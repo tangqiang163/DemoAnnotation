@@ -34,12 +34,6 @@ public class SubOrderDTO {
 
     private String storeName;
 
-    private BigDecimal subOriginalAmount;
-
-    private BigDecimal subAmount;
-
-    private BigDecimal carriagePrice;
-
     private List<CarOrderItemDTO> carItems;
 
     private List<OtherOrderItemDTO> otherItems;

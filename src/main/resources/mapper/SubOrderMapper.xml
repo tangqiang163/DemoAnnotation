@@ -14,9 +14,6 @@
     <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
     <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
     <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
-    <result column="sub_original_amount" property="subOriginalAmount" jdbcType="DECIMAL" />
-    <result column="sub_amount" property="subAmount" jdbcType="DECIMAL" />
-    <result column="carriage_price" property="carriagePrice" jdbcType="DECIMAL" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="BIGINT" />
@@ -25,8 +22,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, main_order_no, sub_order_no, order_type, merchant_id, merchant_name, pay_type,
-    store_code, store_name, receiver_name, receiver_mobile, receiver_address, sub_original_amount,
-    sub_amount, carriage_price, create_time, update_time, create_by, update_by, is_deleted
+    store_code, store_name, receiver_name, receiver_mobile, receiver_address,
+    create_time, update_time, create_by, update_by, is_deleted
   </sql>
   <insert id="insertSubOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.sixeco.order.model.SubOrder" >
     insert into sub_order
@@ -64,15 +61,6 @@
       </if>
       <if test="receiverAddress != null" >
         receiver_address,
-      </if>
-      <if test="subOriginalAmount != null" >
-        sub_original_amount,
-      </if>
-      <if test="subAmount != null" >
-        sub_amount,
-      </if>
-      <if test="carriagePrice != null" >
-        carriage_price,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -124,15 +112,6 @@
       </if>
       <if test="receiverAddress != null" >
         #{receiverAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="subOriginalAmount != null" >
-        #{subOriginalAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="subAmount != null" >
-        #{subAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="carriagePrice != null" >
-        #{carriagePrice,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},

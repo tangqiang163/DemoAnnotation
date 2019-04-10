@@ -32,12 +32,6 @@ public class MainOrderVO {
 
     private Integer orderStatus;
 
-    private Integer productCount;
-
-    private BigDecimal originalAmount;
-
-    private BigDecimal amount;
-
     private String userIdTdc;
 
     private String purchaserId;

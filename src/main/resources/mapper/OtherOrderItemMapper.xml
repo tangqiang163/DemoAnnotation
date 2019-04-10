@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="sub_order_no" property="subOrderNo" jdbcType="VARCHAR" />
     <result column="item_no" property="itemNo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
     <result column="purchase_count" property="purchaseCount" jdbcType="INTEGER" />
     <result column="product_code" property="productCode" jdbcType="VARCHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
@@ -36,7 +37,7 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sub_order_no, item_no, purchase_count, product_code, product_name, product_price, product_sell_price,
+    id, sub_order_no, item_no, type, purchase_count, product_code, product_name,
     product_attr, shipping_way, order_logistics_id, tax_other_price, tax_reason, draw_bill_flag, bill_code,
     supplier_code, shop_id, receiver_name, receiver_mobile, receiver_country, receiver_province,
     receiver_city, receiver_district, receiver_address, discount_flag, integration, create_time,
@@ -52,6 +53,9 @@
         sub_order_no,
       </if>
         item_no,
+      <if test="type != null" >
+        type,
+      </if>
       <if test="purchaseCount != null" >
         purchase_count,
       </if>
@@ -60,12 +64,6 @@
       </if>
       <if test="productName != null" >
         product_name,
-      </if>
-      <if test="productPrice != null" >
-        product_price,
-      </if>
-      <if test="productSellPrice != null" >
-        product_sell_price,
       </if>
       <if test="productAttr != null" >
         product_attr,
@@ -156,12 +154,6 @@
       </if>
       <if test="productName != null" >
         #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productPrice != null" >
-        #{productPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="productSellPrice != null" >
-        #{productSellPrice,jdbcType=DECIMAL},
       </if>
       <if test="productAttr != null" >
         #{productAttr,jdbcType=VARCHAR},

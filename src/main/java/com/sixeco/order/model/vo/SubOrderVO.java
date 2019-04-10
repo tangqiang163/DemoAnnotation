@@ -45,12 +45,6 @@ public class SubOrderVO {
 
     private String receiverAddress;
 
-    private BigDecimal subOriginalAmount;
-
-    private BigDecimal subAmount;
-
-    private BigDecimal carriagePrice;
-
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

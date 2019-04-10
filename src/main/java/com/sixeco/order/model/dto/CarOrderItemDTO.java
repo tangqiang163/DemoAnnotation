@@ -25,9 +25,7 @@ public class CarOrderItemDTO {
 
     private String productCode;
 
-    private BigDecimal productPrice;
-
-    private BigDecimal productSellPrice;
+    private Integer type;
 
     private BigDecimal deposit;
 

@@ -49,45 +49,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MainOrder add(MainOrderDTO mainOrderDTO) {
-        //计算购买商品总数
-        //计算主订单和子订单金额，根据明细金额计算
-        int count = 0;
-        BigDecimal sellPrice = new BigDecimal(0);
-        BigDecimal price = new BigDecimal(0);
-        for (SubOrderDTO s : mainOrderDTO.getSubOrders()) {
-            BigDecimal subSellPrice = new BigDecimal(0);
-            BigDecimal subPrice = new BigDecimal(0);
-            if (s.getCarItems() != null) {
-                for (CarOrderItemDTO c : s.getCarItems()) {
-                    count += c.getPurchaseCount();
-                    subSellPrice.add(c.getProductSellPrice());
-                    subPrice.add(c.getProductPrice());
-                }
-            }
-            if (s.getOtherItems() != null) {
-                for (OtherOrderItemDTO o : s.getOtherItems()) {
-                    count += o.getPurchaseCount();
-                    subSellPrice.add(o.getProductSellPrice());
-                    subPrice.add(o.getProductPrice());
-                }
-            }
-            sellPrice.add(subSellPrice);
-            s.setSubAmount(sellPrice);
-            price.add(subPrice);
-            s.setSubOriginalAmount(price);
-        }
         //插入主订单
         MainOrder mainOrder = MainOrder.builder()
                 .mobile(mainOrderDTO.getMobile())
                 .source(mainOrderDTO.getSource())
-                .productCount(count)
                 .purchaserName(mainOrderDTO.getPurchaserName())
                 .purchaserId(mainOrderDTO.getPurchaserId())
                 .equipment(mainOrderDTO.getEquipment())
                 .userIdTdc(mainOrderDTO.getUserIdTdc())
                 .orderStatus(OrderStatusEnum.PENDING_PAYMENT.getCode())
-                .originalAmount(price)
-                .amount(sellPrice)
                 .idNumber(mainOrderDTO.getIdNumber())
                 .remark(mainOrderDTO.getRemark())
                 .splitFlag(mainOrderDTO.getSplitFlag())
@@ -105,9 +75,6 @@ public class OrderServiceImpl implements OrderService {
                     .payType(subOrderDTO.getPayType())
                     .storeCode(subOrderDTO.getStoreCode())
                     .storeName(subOrderDTO.getStoreName())
-                    .subOriginalAmount(subOrderDTO.getSubOriginalAmount())
-                    .subAmount(subOrderDTO.getSubAmount())
-                    .carriagePrice(subOrderDTO.getCarriagePrice())
                     .receiverAddress(mainOrderDTO.getReceiverAddress())
                     .receiverMobile(mainOrderDTO.getReceiverMobile())
                     .receiverName(mainOrderDTO.getReceiverName()).build();
@@ -121,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
                     CarOrderItem carOrderItem = CarOrderItem.builder()
                             .subOrderNo(subOrderNo)
                             .purchaseCount(carOrderItemDTO.getPurchaseCount())
+                            .type(carOrderItemDTO.getType())
                             .carBodyColor(carOrderItemDTO.getCarBodyColor())
                             .carInteriorColor(carOrderItemDTO.getCarInteriorColor())
                             .carPartInfo(carOrderItemDTO.getCarPartInfo())
@@ -140,8 +108,6 @@ public class OrderServiceImpl implements OrderService {
                             .purchaseCount(otherOrderItemDTO.getPurchaseCount())
                             .productCode(otherOrderItemDTO.getProductCode())
                             .productName(otherOrderItemDTO.getProductName())
-                            .productPrice(otherOrderItemDTO.getProductPrice())
-                            .productSellPrice(otherOrderItemDTO.getProductSellPrice())
                             .productAttr(otherOrderItemDTO.getProductAttr())
                             .drawBillFlag(otherOrderItemDTO.getDrawBillFlag())
                             .billCode(otherOrderItemDTO.getBillCode())

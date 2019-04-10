@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixeco.order.mapper.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.sixeco.order.model.Payment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="main_order_no" property="mainOrderNo" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="mer_order_no" property="merOrderNo" jdbcType="VARCHAR" />
+    <result column="payment_start_time" property="paymentStartTime" jdbcType="TIMESTAMP" />
+    <result column="buyer_email" property="buyerEmail" jdbcType="VARCHAR" />
+    <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
+    <result column="pos_code" property="posCode" jdbcType="VARCHAR" />
+    <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+    <result column="refund_time" property="refundTime" jdbcType="TIMESTAMP" />
+    <result column="refund_start_time" property="refundStartTime" jdbcType="TIMESTAMP" />
+    <result column="refund_payment_id" property="refundPaymentId" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="BIT" />
+    <result column="pos_pay_channel" property="posPayChannel" jdbcType="INTEGER" />
+    <result column="pos_pay_no" property="posPayNo" jdbcType="VARCHAR" />
+    <result column="pos_pay_date" property="posPayDate" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="order_sub_no" property="orderSubNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, main_order_no, channel, type, amount, status, out_trade_no, message, comment,
+    mer_order_no, payment_start_time, buyer_email, buyer_id, pos_code, store_code, refund_time,
+    refund_start_time, refund_payment_id, pay_type, pos_pay_channel, pos_pay_no, pos_pay_date,
+    store_id, order_sub_no, create_time, update_time, create_by, update_by, is_deleted
+  </sql>
+</mapper>

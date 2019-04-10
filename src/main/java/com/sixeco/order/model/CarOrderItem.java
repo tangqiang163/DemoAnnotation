@@ -30,15 +30,13 @@ public class CarOrderItem implements Serializable {
 
     private String itemNo;
 
+    private Integer type;
+
     private Integer purchaseCount;
 
     private String productCode;
 
     private String productName;
-
-    private BigDecimal productPrice;
-
-    private BigDecimal productSellPrice;
 
     private String productAttr;
 

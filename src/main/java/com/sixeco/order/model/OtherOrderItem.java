@@ -30,6 +30,8 @@ public class OtherOrderItem implements Serializable {
 
     private String itemNo;
 
+    private Integer type;
+
     private Integer purchaseCount;
 
     private String productCode;

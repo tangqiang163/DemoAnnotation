@@ -30,10 +30,6 @@ public class OtherOrderItemVO {
 
     private String productName;
 
-    private BigDecimal productPrice;
-
-    private BigDecimal productSellPrice;
-
     private String productAttr;
 
     private String shippingWay;
