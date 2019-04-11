@@ -1,14 +1,9 @@
-package com.sixeco.order.module.order.service.impl;
+package com.sixeco.order.module.insure.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Strings;
 import com.sixeco.order.base.context.PageInfo;
-import com.sixeco.order.base.context.RtnInfo;
-import com.sixeco.order.base.utils.HttpUtils;
 import com.sixeco.order.mapper.CarOrderItemMapper;
 import com.sixeco.order.mapper.MainOrderMapper;
 import com.sixeco.order.mapper.OtherOrderItemMapper;
@@ -19,20 +14,13 @@ import com.sixeco.order.model.OtherOrderItem;
 import com.sixeco.order.model.SubOrder;
 import com.sixeco.order.model.dto.*;
 import com.sixeco.order.model.vo.MainOrderVO;
+import com.sixeco.order.module.insure.service.InsureService;
 import com.sixeco.order.module.order.constant.OrderStatusEnum;
 import com.sixeco.order.module.order.constant.OrderTypeEnum;
-import com.sixeco.order.module.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 订单服务实现
@@ -42,7 +30,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class OrderServiceImpl implements OrderService {
+public class InsureServiceImpl implements InsureService {
 
     @Autowired
     private MainOrderMapper mainOrderMapper;
@@ -56,17 +44,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OtherOrderItemMapper otherOrderItemMapper;
 
-    @Value("${checkOrder.url}")
-    private String checkOrderUrl;
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public MainOrder add(MainOrderDTO mainOrderDTO) {
-
-      // 调用商城产品相关信息
-
-
-
         //插入主订单
         MainOrder mainOrder = MainOrder.builder()
                 .mobile(mainOrderDTO.getMobile())
@@ -210,45 +190,5 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return result;
-    }
-
-    @Override
-    public RtnInfo checkHighQuality(String paramJson) {
-        RtnInfo rtnInfo = new RtnInfo();
-        if (!Strings.isNullOrEmpty(paramJson)) {
-            Map<String,Object> map = JSON.parseObject(paramJson);
-            int count = 0;
-            int size = 0;
-            if (map != null && map.size() > 0 ) {
-                List<Map<String, Object>> orderList = (List<Map<String, Object>>)map.get("orderList");
-                Map<String, Object> userInfo = (Map<String, Object>)map.get("userInfo");
-                if (CollectionUtils.isNotEmpty(orderList) && CollectionUtils.isNotEmpty(userInfo)) {
-                    for (Map<String, Object> map1 : orderList) {
-                        if (CollectionUtils.isNotEmpty(userInfo)) {
-                            count++;
-                        }
-                    }
-                }
-            }
-            if (count > 0 && count == size) {
-                log.info("精品推荐下单校验接口URL：" + checkOrderUrl);
-                log.info("精品推荐下单校验 -- 请求参数 <<< paramJson={}", paramJson);
-                String str = HttpUtils.postReq(checkOrderUrl, "paramJson=" + paramJson,
-                        "application/x-www-form-urlencoded");
-                log.info("精品推荐下单校验接口返回JSON字符串：" + str);
-                if (str != null) {
-                    Map<String, Object> map2 = JSON.parseObject(str);
-                    String code = map.get("code") == null ? "" : String.valueOf(map.get("code"));
-                    if (!code.equals("0") && !code.equals("200")) {
-                        log.info("精品推荐下单校验失败，{}", map.get("msg"));
-                        return RtnInfo.builder().code(501).msg(map.get("msg").toString()).build();
-                    }
-                } else {
-                    log.info("调用精品推荐下单校验接口失败");
-                    return RtnInfo.builder().code(501).msg("调用精品推荐下单校验接口失败").build();
-                }
-            }
-        }
-        return RtnInfo.SUCCESS;
     }
 }

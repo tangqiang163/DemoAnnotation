@@ -1,8 +1,7 @@
-package com.sixeco.order.module.order.service;
+package com.sixeco.order.module.insure.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sixeco.order.base.context.PageInfo;
-import com.sixeco.order.base.context.RtnInfo;
 import com.sixeco.order.model.MainOrder;
 import com.sixeco.order.model.dto.MainOrderDTO;
 import com.sixeco.order.model.dto.MainOrderUpdateDTO;
@@ -14,7 +13,7 @@ import com.sixeco.order.model.vo.MainOrderVO;
  * @author: Zhanghe
  * @date: 2019-03-28
  */
-public interface OrderService {
+public interface InsureService {
 
     MainOrder add(MainOrderDTO mainOrderDTO);
 
@@ -25,7 +24,4 @@ public interface OrderService {
     int updateStatus(Long id, Integer status);
 
     int update(MainOrderUpdateDTO mainOrderUpdateDTO);
-
-    // 精品下单校验
-    RtnInfo checkHighQuality(String paramJson);
 }

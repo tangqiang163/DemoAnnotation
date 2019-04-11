@@ -1,11 +1,14 @@
 package com.sixeco.order.model.dto;
 
+import com.sixeco.order.model.OrderExtra;
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import reactor.util.annotation.NonNull;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -23,12 +26,18 @@ import java.util.List;
 @AllArgsConstructor
 public class MainOrderDTO {
 
-    private String authId;
+    @NotBlank(message = "产品ID不能为空")
+    private Integer productId;
 
+    @NotBlank(message = "产品配置ID不能为空")
+    private Integer productItemId;
+
+    @NotBlank(message = "用户id不能为空")
     private String userIdTdc;
 
     private String purchaserId;
 
+    @NotBlank(message = "购买人姓名不能为空")
     private String purchaserName;
 
     private String source;
@@ -60,6 +69,21 @@ public class MainOrderDTO {
     private String splitPlan;
 
     private String remark;
+
+    private String mergerFlag;
+
+    @NotBlank(message = "支付方式不能为空")
+    private Integer payType;
+
+    // 类型1保障2保险
+    private Integer suiteType;
+    // 保险或保障ID
+    private Integer suiteId;
+
+    private OrderExtra orderExtra;
+
+    // 精品推荐下单json字符串
+    private String paramJson2;
 
     @Size(min = 1, message = "至少有一个子订单")
     private List<SubOrderDTO> subOrders;
