@@ -50,8 +50,9 @@ public class NormalCallbackHandler implements CallbackHandler {
         //查询订单数据
         String orderSubNo = null;
         MainOrder mainOrder = MainOrder.builder().build();
-        //此处定义混乱，需要调整
+        //分笔支付失败时update状态对象
         SeparatePayment separatePayment = null;
+        //校验是否存在数据
         if(paymentDTO.getMainOrderNo().length() >= 20) {
             //位数大于20则为分笔支付订单号
             orderSubNo = paymentDTO.getMainOrderNo();
@@ -121,14 +122,15 @@ public class NormalCallbackHandler implements CallbackHandler {
                 }
                 String carVsn = cars.get(0).getCarVsn();
                 //此处代码考虑优化
-                boolean flag = true;
+                boolean flag = Boolean.TRUE;
                 QueryWrapper<Payment> paymentQueryWrapper2 = new QueryWrapper<>();
                 paymentQueryWrapper2.eq("main_order_no", detail.getMainOrderNo());
                 List<Payment> paymentsByOrderNo = paymentMapper.selectList(paymentQueryWrapper2);
                 if (!Iterables.isEmpty(paymentsByOrderNo)) {
                     flag = false;
                 }
-                if (mainOrder.getSplitFlag()) {
+                //已经为false不走这段了
+                if (!flag || mainOrder.getSplitFlag()) {
                     QueryWrapper<SeparatePayment> separatePaymentQueryWrapper = new QueryWrapper<>();
                     separatePaymentQueryWrapper.eq("main_order_no", detail.getMainOrderNo());
                     List<SeparatePayment> separatePayments = separatePaymentMapper.selectList(separatePaymentQueryWrapper);
