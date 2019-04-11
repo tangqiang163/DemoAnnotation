@@ -47,6 +47,8 @@ public class MainOrder implements Serializable {
 
     private String idNumber;
 
+    private Integer payType;
+
     private Boolean settlementStatus;
 
     private LocalDateTime settledTime;

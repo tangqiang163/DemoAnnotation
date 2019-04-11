@@ -21,7 +21,8 @@ public enum OrderTypeEnum {
     CAR_SERVICE(3, "车服"),
     INSURANCE(4, "保险"),
     COUPON(5, "优惠券"),
-    DEPOSIT(6, "体验车押金");
+    DEPOSIT(6, "体验车押金"),
+    PURPOSE(12, "意向金");
 
     @Getter
     private Integer code;

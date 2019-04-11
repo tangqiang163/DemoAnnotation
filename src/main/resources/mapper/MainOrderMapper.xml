@@ -12,6 +12,7 @@
     <result column="purchaser_name" property="purchaserName" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
     <result column="settlement_status" property="settlementStatus" jdbcType="INTEGER" />
     <result column="settled_time" property="settledTime" jdbcType="TIMESTAMP" />
     <result column="split_flag" property="splitFlag" jdbcType="BIT" />
@@ -34,6 +35,7 @@
     <result column="purchaser_name" property="purchaserName" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
     <result column="settlement_status" property="settlementStatus" jdbcType="INTEGER" />
     <result column="settled_time" property="settledTime" jdbcType="TIMESTAMP" />
     <result column="split_flag" property="splitFlag" jdbcType="BIT" />
@@ -66,7 +68,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, main_order_no, source, equipment, order_status, user_id_tdc, purchaser_id,
-    purchaser_name, mobile, id_number, settlement_status, settled_time, split_flag,
+    purchaser_name, mobile, id_number, pay_type, settlement_status, settled_time, split_flag,
     split_plan, remark, create_time, update_time, create_by, update_by, is_deleted
   </sql>
   <insert id="insertMainOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.sixeco.order.model.MainOrder" >
@@ -99,6 +101,9 @@
       </if>
       <if test="idNumber != null" >
         id_number,
+      </if>
+      <if test="payType != null" >
+        pay_type,
       </if>
       <if test="settlementStatus != null" >
         settlement_status,
@@ -160,6 +165,9 @@
       <if test="idNumber != null" >
         #{idNumber,jdbcType=VARCHAR},
       </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=TINYINT},
+      </if>
       <if test="settlementStatus != null" >
         #{settlementStatus,jdbcType=BIT},
       </if>
@@ -203,6 +211,7 @@
       main_order.purchaser_id,
       main_order.mobile,
       main_order.id_number,
+      main_order.pay_type,
       main_order.settlement_status,
       main_order.settled_time,
       main_order.split_flag,
