@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixeco.order.mapper.SeparatePaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.sixeco.order.model.SeparatePayment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="main_order_no" property="mainOrderNo" jdbcType="VARCHAR" />
+    <result column="order_sub_no" property="orderSubNo" jdbcType="VARCHAR" />
+    <result column="pay_amount" property="payAmount" jdbcType="DECIMAL" />
+    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+    <result column="paid_time" property="paidTime" jdbcType="TIMESTAMP" />
+    <result column="pay_order" property="payOrder" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, main_order_no, order_sub_no, pay_amount, pay_status, paid_time, pay_order, create_time,
+    update_time, create_by, update_by, is_deleted
+  </sql>
+</mapper>
