@@ -52,8 +52,6 @@ public class MainOrderDTO {
             message = "身份证号格式错误")
     private String idNumber;
 
-    private Integer payType;
-
     private String receiverProvince;
 
     private String receiverCity;
